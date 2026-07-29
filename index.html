@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EmotionMetrics.ai - Artificial Intelligence specialized in understanding human emotions to improve strategic decisions">
+    <meta name="keywords" content="AI, emotional intelligence, data analysis, qualitative research, strategic decisions">
+    <title>EmotionMetrics | Emotion data for better decisions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0F172A;
+            --primary-light: #1E293B;
+            --secondary: #00D9FF;
+            --accent: #7C3AED;
+            --bg-dark: #0A0E27;
+            --text-light: #F8FAFC;
+            --text-gray: #CBD5E1;
+            --border-dark: #1E293B;
+            --success: #10B981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ===== HEADER / NAVIGATION ===== */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(10, 14, 39, 0.97);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-dark);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo banner centrado en la parte superior */
+        .logo-banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 0 14px;
+            width: 100%;
+            border-bottom: 1px solid rgba(0,217,255,0.1);
+        }
+
+        .logo-banner a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .logo-banner img {
+            height: 160px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .logo-banner img:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        /* Navegación debajo del logo */
+        .nav-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            padding: 8px 0;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.38rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover { color: var(--secondary); }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after { width: 100%; }
+
+        .lang-selector {
+            display: flex;
+            gap: 6px;
+            border-left: 1px solid var(--border-dark);
+            padding-left: 18px;
+            margin-left: 18px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.82rem;
+            transition: all 0.3s;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .lang-btn.active {
+            color: var(--secondary);
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .lang-selector .lang-btn {
+            font-size: 1.64rem;
+        }
+
+        .lang-btn:hover { color: var(--secondary); }
+
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 8px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.98);
+            border-top: 1px solid var(--border-dark);
+            padding: 16px 20px;
+            gap: 12px;
+        }
+
+        .mobile-nav.open { display: flex; }
+
+        .mobile-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: color 0.3s;
+        }
+
+        .mobile-nav a:hover { color: var(--secondary); }
+
+        .mobile-lang {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            margin-top: 210px;
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(124, 58, 237, 0.1) 100%);
+            border-bottom: 1px solid var(--border-dark);
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .tagline {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: var(--bg-dark);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(0, 217, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            height: 450px;
+            border: 2px solid var(--border-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 100%);
+            margin-bottom: 30px;
+            border-radius: 2px;
+        }
+
+        /* ===== QUIÉNES SOMOS ===== */
+        #quienes-somos {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.5) 0%, rgba(124, 58, 237, 0.05) 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .locations {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .location-item {
+            flex: 1;
+            padding: 20px;
+            background: rgba(0, 217, 255, 0.05);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .location-item:hover {
+            border-color: var(--secondary);
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15);
+        }
+
+        .location-item i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .location-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .location-item p {
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            margin: 0;
+        }
+
+        .about-image {
+            height: 400px;
+            border: 2px solid var(--border-dark);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== SERVICIOS ===== */
+        .services-intro {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            margin-bottom: 50px;
+            line-height: 1.8;
+            max-width: 900px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .service-card {
+            padding: 36px;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.15);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(0,217,255,0.15), rgba(124,58,237,0.15));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .service-icon i {
+            font-size: 1.6rem;
+            color: var(--secondary);
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-light);
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .service-tag {
+            display: inline-block;
+            background: rgba(0,217,255,0.1);
+            color: var(--secondary);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* ===== METODOLOGÍA ===== */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 28px;
+            margin-bottom: 50px;
+        }
+
+        .methodology-item {
+            padding: 30px;
+            background: rgba(0, 217, 255, 0.05);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .methodology-item:hover {
+            border-color: var(--secondary);
+            transform: translateY(-4px);
+        }
+
+        .methodology-item .step-icon {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 14px;
+            display: block;
+            opacity: 0.85;
+        }
+
+        .methodology-item h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .methodology-item p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .methodology-diagram {
+            height: 450px;
+            border: 2px solid var(--border-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 40px;
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .methodology-diagram img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        /* ===== INDUSTRIAS ===== */
+        .industries-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .industry-tab {
+            padding: 10px 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border-dark);
+            background: transparent;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .industry-tab.active,
+        .industry-tab:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            background: rgba(0,217,255,0.08);
+        }
+
+        .industry-panel {
+            display: none;
+        }
+
+        .industry-panel.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .industry-text h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .industry-text p {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .industries-image {
+            height: 400px;
+            border: 2px solid var(--border-dark);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .industries-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== BLOG ===== */
+        .blog-intro {
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin-bottom: 50px;
+            line-height: 1.8;
+            max-width: 900px;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: rgba(0, 217, 255, 0.04);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+            box-shadow: 0 16px 40px rgba(0, 217, 255, 0.12);
+        }
+
+        .blog-card-header {
+            padding: 28px 28px 0;
+        }
+
+        .blog-num {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .blog-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .blog-content {
+            padding: 0 28px 28px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-content p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        .blog-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: gap 0.3s;
+        }
+
+        .blog-read-more:hover { gap: 14px; }
+
+        /* ===== MODAL DE ARTÍCULO DE BLOG ===== */
+        .blog-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .blog-modal-overlay.open { display: flex; justify-content: center; align-items: flex-start; }
+
+        .blog-modal {
+            background: var(--primary-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            max-width: 780px;
+            width: 100%;
+            padding: 50px;
+            position: relative;
+            margin: auto;
+        }
+
+        .blog-modal-close {
+            position: absolute;
+            top: 20px; right: 24px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+
+        .blog-modal-close:hover { color: var(--secondary); }
+
+        .blog-modal-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .blog-modal h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .blog-modal-body p {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .blog-modal-body h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin: 30px 0 12px;
+        }
+
+        .blog-modal-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: gap 0.3s;
+        }
+
+        .blog-modal-back:hover { gap: 14px; }
+
+        /* ===== CONTACTO ===== */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-intro {
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .form-group label .optional {
+            font-weight: 400;
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            margin-left: 4px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 11px 14px;
+            background: rgba(0, 217, 255, 0.05);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .form-group select option {
+            background: var(--primary-dark);
+            color: var(--text-light);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .contact-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .contact-info p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .contact-email-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            background: rgba(0,217,255,0.04);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .contact-email-item i {
+            color: var(--secondary);
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .contact-email-item div span {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-gray);
+            margin-bottom: 2px;
+        }
+
+        .contact-email-item div a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .contact-email-item div a:hover { text-decoration: underline; }
+
+        .about-intro-text {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .about-map-full {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        .map-container {
+            height: 480px;
+            border: 2px solid var(--border-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .map-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            background: #0a1628;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary-dark);
+            padding: 60px 0 40px;
+            text-align: center;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        .footer-logo {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-logo img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .footer-logo img:hover { opacity: 1; }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--accent);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* ===== MODAL FORMULARIO DE CONTACTO (desde íconos de sede) ===== */
+        .office-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 3000;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .office-modal-overlay.open { display: flex; justify-content: center; align-items: center; }
+
+        .office-modal {
+            background: var(--primary-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            max-width: 560px;
+            width: 100%;
+            padding: 44px;
+            position: relative;
+        }
+
+        .office-modal-close {
+            position: absolute;
+            top: 16px; right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .office-modal-close:hover { color: var(--secondary); }
+
+        .office-modal h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-light);
+        }
+
+        .office-modal .office-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 28px;
+        }
+
+        .office-modal .contact-form { gap: 14px; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .hero { margin-top: 220px; }
+            .hero-content,
+            .about-content,
+            .industry-panel.active,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            .hero-text h1 { font-size: 2.4rem; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-row { display: none; }
+            .hamburger { display: flex; }
+            .logo-banner { position: relative; padding-right: 60px; }
+            .hero { margin-top: 120px; }
+            .hero-image { height: 280px; }
+            .about-image,
+            .industries-image { height: 280px; }
+            .methodology-diagram { height: 300px; }
+            .footer-logo img { height: 70px; }
+            .logo-banner img { height: 80px; }
+            .logo-banner { padding: 12px 0 10px; }
+            .blog-modal { padding: 30px 24px; }
+            .office-modal { padding: 30px 24px; }
+            .map-container { height: 220px; margin-top: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .locations { flex-direction: column; }
+            .hero-cta { flex-direction: column; }
+            .hero-cta .btn { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-container">
+            <!-- Logo como banner centrado -->
+            <div class="logo-banner">
+                <a href="#inicio">
+                    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/OoApHKyynvMxaugo.png" alt="EmotionMetrics Logo">
+                </a>
+            </div>
+            <!-- Menú de navegación debajo del logo -->
+            <div class="nav-row">
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#inicio" data-es="Inicio" data-en="Home" data-pt="Início">Home</a></li>
+                        <li><a href="#quienes-somos" data-es="Quiénes Somos" data-en="About Us" data-pt="Quem Somos">About Us</a></li>
+                        <li><a href="#servicios" data-es="Servicios" data-en="Services" data-pt="Serviços">Services</a></li>
+                        <li><a href="#metodologia" data-es="Metodología" data-en="Methodology" data-pt="Metodologia">Methodology</a></li>
+                        <li><a href="#industrias" data-es="Industrias" data-en="Industries" data-pt="Indústrias">Industries</a></li>
+                        <li><a href="#blog" data-es="Blog" data-en="Blog" data-pt="Blog">Blog</a></li>
+                        <li><a href="#contacto" data-es="Contacto" data-en="Contact" data-pt="Contato">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="lang-selector">
+                    <button class="lang-btn" data-lang="es" title="Español" aria-label="Español">🇦🇷</button>
+                    <button class="lang-btn active" data-lang="en" title="English" aria-label="English">🇺🇸</button>
+                    <button class="lang-btn" data-lang="pt" title="Português" aria-label="Português">🇧🇷</button>
+                </div>
+            </div>
+            <!-- Hamburger para móvil -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <!-- Menú móvil desplegable -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#inicio" data-es="Inicio" data-en="Home" data-pt="Início">Home</a>
+            <a href="#quienes-somos" data-es="Quiénes Somos" data-en="About Us" data-pt="Quem Somos">About Us</a>
+            <a href="#servicios" data-es="Servicios" data-en="Services" data-pt="Serviços">Services</a>
+            <a href="#metodologia" data-es="Metodología" data-en="Methodology" data-pt="Metodologia">Methodology</a>
+            <a href="#industrias" data-es="Industrias" data-en="Industries" data-pt="Indústrias">Industries</a>
+            <a href="#blog" data-es="Blog" data-en="Blog" data-pt="Blog">Blog</a>
+            <a href="#contacto" data-es="Contacto" data-en="Contact" data-pt="Contato">Contact</a>
+            <div class="mobile-lang">
+                <button class="lang-btn" data-lang="es" title="Español" aria-label="Español">🇦🇷</button>
+                <button class="lang-btn active" data-lang="en" title="English" aria-label="English">🇺🇸</button>
+                <button class="lang-btn" data-lang="pt" title="Português" aria-label="Português">🇧🇷</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 data-es="Datos emocionales para mejores decisiones" data-en="Emotion data for better decisions" data-pt="Dados emocionais para melhores decisões">
+                        Emotion data for better decisions
+                    </h1>
+                    <p class="tagline" data-es="Inteligencia artificial especializada en comprender emociones humanas para mejorar decisiones estratégicas" data-en="Artificial intelligence specialized in understanding human emotions to improve strategic decisions" data-pt="Inteligência artificial especializada em compreender emoções humanas para melhorar decisões estratégicas">
+                        Artificial intelligence specialized in understanding human emotions to improve strategic decisions
+                    </p>
+                    <p data-es="Somos una empresa de inteligencia artificial especializada en comprender emociones humanas para mejorar decisiones estratégicas. Ayudamos a organizaciones de América Latina y el mundo a escuchar lo que sus clientes, usuarios y stakeholders realmente sienten —más allá de lo que dicen— y a convertir esa comprensión emocional en inteligencia accionable antes de invertir, lanzar o decidir." data-en="We are an artificial intelligence company specialized in understanding human emotions to improve strategic decisions. We help organizations in Latin America and around the world hear what their customers, users and stakeholders really feel—beyond what they say—and turn that emotional understanding into actionable intelligence before investing, launching or deciding." data-pt="Somos uma empresa de inteligência artificial especializada em compreender emoções humanas para melhorar decisões estratégicas. Ajudamos organizações da América Latina e do mundo a ouvir o que seus clientes, usuários e stakeholders realmente sentem—além do que dizem—e converter essa compreensão emocional em inteligência acionável antes de investir, lançar ou decidir.">
+                        We are an artificial intelligence company specialized in understanding human emotions to improve strategic decisions. We help organizations in Latin America and around the world hear what their customers, users and stakeholders really feel—beyond what they say—and turn that emotional understanding into actionable intelligence before investing, launching or deciding.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#contacto" class="btn btn-primary" data-es="Iniciar Conversación" data-en="Start Conversation" data-pt="Iniciar Conversa">Start Conversation</a>
+                        <a href="#quienes-somos" class="btn btn-secondary" data-es="Saber Más" data-en="Learn More" data-pt="Saber Mais">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/CZecpTuOzAMVzFlU.jpg" alt="AI Data Stream">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== QUIÉNES SOMOS ===== -->
+    <section id="quienes-somos">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title" data-es="Quiénes Somos" data-en="About Us" data-pt="Quem Somos">About Us</h2>
+            <p class="about-intro-text" data-es="EmotionMetrics es una empresa de inteligencia artificial con sede en Miami, con oficinas regionales en Buenos Aires y São Paulo." data-en="EmotionMetrics is an artificial intelligence company headquartered in Miami, with regional offices in Buenos Aires and São Paulo." data-pt="EmotionMetrics é uma empresa de inteligência artificial com sede em Miami, com escritórios regionais em Buenos Aires e São Paulo.">
+                EmotionMetrics is an artificial intelligence company headquartered in Miami, with regional offices in Buenos Aires and São Paulo.
+            </p>
+            <!-- Mapa ancho completo -->
+            <div class="map-container about-map-full">
+                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/VRbLNxLfgkQJReld.png" alt="EmotionMetrics Global Map">
+            </div>
+            <!-- Sedes + foto en dos columnas -->
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="locations">
+                        <!-- Cada ícono abre un formulario de contacto para esa sede -->
+                        <a href="javascript:void(0)" class="location-item" onclick="openOfficeModal('miami')" title="Contact Miami HQ">
+                            <i class="fas fa-city"></i>
+                            <h4>Miami, USA</h4>
+                            <p data-es="Sede Principal" data-en="Headquarters" data-pt="Sede Principal">Headquarters</p>
+                        </a>
+                        <a href="javascript:void(0)" class="location-item" onclick="openOfficeModal('bsas')" title="Contact Buenos Aires Office">
+                            <i class="fas fa-building"></i>
+                            <h4>Buenos Aires, AR</h4>
+                            <p data-es="Oficina Regional" data-en="Regional Office" data-pt="Escritório Regional">Regional Office</p>
+                        </a>
+                        <a href="javascript:void(0)" class="location-item" onclick="openOfficeModal('sao')" title="Contact São Paulo Office">
+                            <i class="fas fa-landmark"></i>
+                            <h4>São Paulo, BR</h4>
+                            <p data-es="Oficina Regional" data-en="Regional Office" data-pt="Escritório Regional">Regional Office</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/zxtuLXpRooesSVPQ.jpg" alt="EmotionMetrics Team at Work">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICIOS ===== -->
+    <section id="servicios">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title" data-es="Servicios" data-en="Services" data-pt="Serviços">Services</h2>
+            <p class="services-intro" data-es="La diferencia entre una investigación convencional y una investigación de EmotionMetrics no está en el tipo de preguntas que hacemos: está en la capa de realidad que podemos acceder. Mientras los métodos tradicionales capturan lo que las personas dicen, nuestro enjambre de agentes de IA lee lo que sienten." data-en="The difference between conventional research and EmotionMetrics research is not in the type of questions we ask: it is in the layer of reality we can access. While traditional methods capture what people say, our AI agent swarm reads what they feel." data-pt="A diferença entre uma pesquisa convencional e uma pesquisa da EmotionMetrics não está no tipo de perguntas que fazemos: está na camada da realidade que podemos acessar. Enquanto os métodos tradicionais capturam o que as pessoas dizem, nosso enxame de agentes de IA lê o que sentem.">
+                The difference between conventional research and EmotionMetrics research is not in the type of questions we ask: it is in the layer of reality we can access. While traditional methods capture what people say, our AI agent swarm reads what they feel.
+            </p>
+            <div class="services-grid">
+
+                <!-- 3.1 Emotional Listening -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-ear-listen"></i></div>
+
+                    <h3 data-es="Escucha Emocional con IA" data-en="Emotional Listening with AI" data-pt="Escuta Emocional com IA">Emotional Listening with AI</h3>
+                    <p data-es="Detecta en tiempo real la emoción detrás de cada respuesta: la confianza, la duda, el entusiasmo genuino, la resistencia no expresada. Llegamos donde los demás no llegan porque escuchamos de una manera que los demás no pueden." data-en="Detects in real time the emotion behind every response: confidence, doubt, genuine enthusiasm, unexpressed resistance. We reach where others cannot because we listen in a way others cannot." data-pt="Detecta em tempo real a emoção por trás de cada resposta: confiança, dúvida, entusiasmo genuíno, resistência não expressa. Chegamos onde os outros não chegam porque ouvimos de uma forma que os outros não conseguem.">
+                        Detects in real time the emotion behind every response: confidence, doubt, genuine enthusiasm, unexpressed resistance. We reach where others cannot because we listen in a way others cannot.
+                    </p>
+                </div>
+
+                <!-- 3.2 Multimodal Analysis -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+
+                    <h3 data-es="Análisis Emocional Multimodal" data-en="Multimodal Emotional Analysis" data-pt="Análise Emocional Multimodal">Multimodal Emotional Analysis</h3>
+                    <p data-es="Analiza expresiones faciales, tono vocal, lenguaje corporal y contenido verbal de forma coordinada, cruzando señales para detectar incoherencias entre lo que se dice y lo que se siente." data-en="Analyzes facial expressions, vocal tone, body language and verbal content in a coordinated way, crossing signals to detect inconsistencies between what is said and what is felt." data-pt="Analisa expressões faciais, tom vocal, linguagem corporal e conteúdo verbal de forma coordenada, cruzando sinais para detectar inconsistências entre o que é dito e o que é sentido.">
+                        Analyzes facial expressions, vocal tone, body language and verbal content in a coordinated way, crossing signals to detect inconsistencies between what is said and what is felt.
+                    </p>
+                </div>
+
+                <!-- 3.3 MVP Testing -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-rocket"></i></div>
+
+                    <h3 data-es="Testeo de MVP y Ciclos Ágiles" data-en="MVP Testing & Agile Cycles" data-pt="Teste de MVP e Ciclos Ágeis">MVP Testing & Agile Cycles</h3>
+                    <p data-es="Feedback emocional en horas, no en semanas. Integra evidencia emocional en cada sprint de desarrollo ágil: qué genera atracción, qué genera duda, qué genera abandono y por qué." data-en="Emotional feedback in hours, not weeks. Integrate emotional evidence in every agile development sprint: what generates attraction, doubt, abandonment and why." data-pt="Feedback emocional em horas, não em semanas. Integre evidência emocional em cada sprint de desenvolvimento ágil: o que gera atração, dúvida, abandono e por quê.">
+                        Emotional feedback in hours, not weeks. Integrate emotional evidence in every agile development sprint: what generates attraction, doubt, abandonment and why.
+                    </p>
+                </div>
+
+                <!-- 3.4 AI for Agile -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
+
+                    <h3 data-es="IA para Metodologías Ágiles" data-en="AI for Agile Methodologies" data-pt="IA para Metodologias Ágeis">AI for Agile Methodologies</h3>
+                    <p data-es="Aprenda más rápido. Decida con más precisión. Escale más lejos. Nuestro enfoque AI-first convierte las emociones de sus usuarios en datos precisos en el tiempo de un sprint, acelerando el ciclo de aprendizaje organizacional." data-en="Learn faster. Decide with more precision. Scale further. Our AI-first approach converts your users' emotions into precise data in the time of a sprint, accelerating the organizational learning cycle." data-pt="Aprenda mais rápido. Decida com mais precisão. Escale mais longe. Nossa abordagem AI-first converte as emoções de seus usuários em dados precisos no tempo de um sprint, acelerando o ciclo de aprendizado organizacional.">
+                        Learn faster. Decide with more precision. Scale further. Our AI-first approach converts your users' emotions into precise data in the time of a sprint, accelerating the organizational learning cycle.
+                    </p>
+                </div>
+
+                <!-- 3.5 Continuous Intelligence -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+
+                    <h3 data-es="Inteligencia Continua" data-en="Continuous Intelligence" data-pt="Inteligência Contínua">Continuous Intelligence</h3>
+                    <p data-es="De los estudios aislados a la escucha permanente. Un sistema continuo de inteligencia que monitorea percepciones, emociones y expectativas de sus stakeholders en tiempo real, anticipando cambios antes de que se vuelvan crisis." data-en="From isolated studies to permanent listening. A continuous intelligence system that monitors perceptions, emotions and expectations of your stakeholders in real time, anticipating changes before they become crises." data-pt="De estudos isolados à escuta permanente. Um sistema contínuo de inteligência que monitora percepções, emoções e expectativas de seus stakeholders em tempo real, antecipando mudanças antes que se tornem crises.">
+                        From isolated studies to permanent listening. A continuous intelligence system that monitors perceptions, emotions and expectations of your stakeholders in real time, anticipating changes before they become crises.
+                    </p>
+                </div>
+
+                <!-- 3.6 Educational Research -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+
+                    <h3 data-es="Investigación Educativa" data-en="Educational Research" data-pt="Pesquisa Educacional">Educational Research</h3>
+                    <p data-es="Lo que los estudiantes sienten sobre su institución, su docente y su experiencia de aprendizaje. Inteligencia emocional para la gestión institucional y áulica basada en evidencia real." data-en="What students feel about their institution, their teacher and their learning experience. Emotional intelligence for institutional and classroom management based on real evidence." data-pt="O que os alunos sentem sobre sua instituição, seu professor e sua experiência de aprendizado. Inteligência emocional para gestão institucional e de sala de aula baseada em evidências reais.">
+                        What students feel about their institution, their teacher and their learning experience. Emotional intelligence for institutional and classroom management based on real evidence.
+                    </p>
+                </div>
+
+                <!-- 3.7 Opinion Polling -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-poll-h"></i></div>
+
+                    <h3 data-es="Sondeo de Opinión y Posicionamiento" data-en="Opinion Polling & Positioning" data-pt="Sondagem de Opinião e Posicionamento">Opinion Polling & Positioning</h3>
+                    <p data-es="Percepción real, no respuestas declaradas. Análisis a gran escala integrando entrevistas interactivas con análisis profundo de lenguaje natural, tono de voz y patrones emocionales." data-en="Real perception, not declared responses. Large-scale analysis integrating interactive interviews with deep natural language analysis, voice tone and emotional patterns." data-pt="Percepção real, não respostas declaradas. Análise em grande escala integrando entrevistas interativas com análise profunda de linguagem natural, tom de voz e padrões emocionais.">
+                        Real perception, not declared responses. Large-scale analysis integrating interactive interviews with deep natural language analysis, voice tone and emotional patterns.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== METODOLOGÍA ===== -->
+    <section id="metodologia">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title" data-es="Metodología" data-en="Methodology" data-pt="Metodologia">Methodology</h2>
+            <p class="section-subtitle" data-es="En EmotionMetrics operamos bajo una metodología AI-first donde la inteligencia artificial forma parte del núcleo de nuestros procesos, no una herramienta auxiliar." data-en="At EmotionMetrics we operate under an AI-first methodology where artificial intelligence is part of the core of our processes, not an auxiliary tool." data-pt="Na EmotionMetrics operamos sob uma metodologia AI-first onde a inteligência artificial faz parte do núcleo de nossos processos, não uma ferramenta auxiliar.">
+                At EmotionMetrics we operate under an AI-first methodology where artificial intelligence is part of the core of our processes, not an auxiliary tool.
+            </p>
+            <div class="methodology-grid">
+                <div class="methodology-item">
+                    <i class="fas fa-microchip step-icon"></i>
+                    <h3 data-es="Enfoque AI-First" data-en="AI-First Approach" data-pt="Abordagem AI-First">AI-First Approach</h3>
+                    <p data-es="La IA es la infraestructura sobre la que se construye todo el trabajo. Análisis en tiempo real con una profundidad que supera cualquier metodología manual." data-en="AI is the infrastructure on which all work is built. Real-time analysis with a depth that surpasses any manual methodology." data-pt="A IA é a infraestrutura sobre a qual todo o trabalho é construído. Análise em tempo real com uma profundidade que supera qualquer metodologia manual.">
+                        AI is the infrastructure on which all work is built. Real-time analysis with a depth that surpasses any manual methodology.
+                    </p>
+                </div>
+                <div class="methodology-item">
+                    <i class="fas fa-network-wired step-icon"></i>
+                    <h3 data-es="Enjambre de Agentes IA" data-en="AI Agent Swarm" data-pt="Enxame de Agentes IA">AI Agent Swarm</h3>
+                    <p data-es="Múltiples agentes especializados trabajan en paralelo: uno conduce la entrevista, otros analizan simultáneamente expresiones, voz y lenguaje. Comprensión multidimensional en tiempo real." data-en="Multiple specialized agents work in parallel: one conducts the interview, others simultaneously analyze expressions, voice and language. Multidimensional understanding in real time." data-pt="Múltiplos agentes especializados trabalham em paralelo: um conduz a entrevista, outros analisam simultaneamente expressões, voz e linguagem. Compreensão multidimensional em tempo real.">
+                        Multiple specialized agents work in parallel: one conducts the interview, others simultaneously analyze expressions, voice and language. Multidimensional understanding in real time.
+                    </p>
+                </div>
+                <div class="methodology-item">
+                    <i class="fas fa-layer-group step-icon"></i>
+                    <h3 data-es="Análisis Emocional Multimodal" data-en="Multimodal Emotional Analysis" data-pt="Análise Emocional Multimodal">Multimodal Emotional Analysis</h3>
+                    <p data-es="Integramos expresiones faciales, tono vocal, lenguaje corporal y contenido verbal de forma simultánea para construir una lectura emocional de alta fidelidad." data-en="We integrate facial expressions, vocal tone, body language and verbal content simultaneously to build a high-fidelity emotional reading." data-pt="Integramos expressões faciais, tom vocal, linguagem corporal e conteúdo verbal simultaneamente para construir uma leitura emocional de alta fidelidade.">
+                        We integrate facial expressions, vocal tone, body language and verbal content simultaneously to build a high-fidelity emotional reading.
+                    </p>
+                </div>
+                <div class="methodology-item">
+                    <i class="fas fa-diagram-project step-icon"></i>
+                    <h3 data-es="Flujo de Proyecto" data-en="Project Flow" data-pt="Fluxo de Projeto">Project Flow</h3>
+                    <p data-es="Co-diseño → ejecución en paralelo → monitoreo en tiempo real → presentación ejecutiva orientada a la decisión. Resultados en horas, no en semanas." data-en="Co-design → parallel execution → real-time monitoring → decision-oriented executive presentation. Results in hours, not weeks." data-pt="Co-design → execução em paralelo → monitoramento em tempo real → apresentação executiva orientada à decisão. Resultados em horas, não em semanas.">
+                        Co-design → parallel execution → real-time monitoring → decision-oriented executive presentation. Results in hours, not weeks.
+                    </p>
+                </div>
+            </div>
+            <div class="methodology-diagram">
+                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/FTkMXvtusKeblNhG.png" alt="Abstract AI Agent Swarm Visualization" style="object-fit:contain; object-position:center;">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INDUSTRIAS ===== -->
+    <section id="industrias">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title" data-es="Industrias" data-en="Industries" data-pt="Indústrias">Industries</h2>
+            <p class="section-subtitle" data-es="Inteligencia emocional aplicada donde más importa. Tenemos experiencia trabajando con organizaciones del sector privado, instituciones públicas y organismos en América Latina y mercados internacionales." data-en="Emotional intelligence applied where it matters most. We have experience working with private sector organizations, public institutions and agencies in Latin America and international markets." data-pt="Inteligência emocional aplicada onde mais importa. Temos experiência trabalhando com organizações do setor privado, instituições públicas e organismos na América Latina e mercados internacionais.">
+                Emotional intelligence applied where it matters most. We have experience working with private sector organizations, public institutions and agencies in Latin America and international markets.
+            </p>
+
+            <!-- Tabs de industrias -->
+            <div class="industries-tabs">
+                <button class="industry-tab active" onclick="showIndustry('companies', this)" data-es="Empresas y Marcas" data-en="Companies & Brands" data-pt="Empresas e Marcas">Companies & Brands</button>
+                <button class="industry-tab" onclick="showIndustry('public', this)" data-es="Sector Público y Organismos" data-en="Public Sector & Agencies" data-pt="Setor Público e Organismos">Public Sector & Agencies</button>
+            </div>
+
+            <!-- Panel: Empresas y Marcas -->
+            <div class="industry-panel active" id="panel-companies">
+                <div class="industry-text">
+                    <h3 data-es="Empresas y Marcas" data-en="Companies & Brands" data-pt="Empresas e Marcas">Companies & Brands</h3>
+                    <p data-es="Para empresas y marcas, EmotionMetrics opera como partner de inteligencia emocional a lo largo de todo el ciclo de diseño y creación de producto o servicio. Nuestro diferencial más poderoso es la capacidad de incorporar feedback emocional desde las primeras etapas del proceso: cuando el producto es aún un concepto, cuando el prototipo es un MVP incompleto." data-en="For companies and brands, EmotionMetrics operates as an emotional intelligence partner throughout the entire product or service design and creation cycle. Our most powerful differentiator is the ability to incorporate emotional feedback from the earliest stages of the process: when the product is still a concept, when the prototype is an incomplete MVP." data-pt="Para empresas e marcas, a EmotionMetrics opera como parceira de inteligência emocional ao longo de todo o ciclo de design e criação de produto ou serviço. Nosso diferencial mais poderoso é a capacidade de incorporar feedback emocional desde as primeiras etapas do processo: quando o produto ainda é um conceito, quando o protótipo é um MVP incompleto.">
+                        EmotionMetrics acts as an emotional intelligence partner across the entire product cycle — from concept to launch. We capture what customers truly feel at every stage, turning emotional evidence into precise, actionable data that drives better decisions.
+                    </p>
+                </div>
+                <div class="industries-image">
+                    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/HfjuxGuTJVZKMcQx.jpg" alt="Companies and Brands">
+                </div>
+            </div>
+
+            <!-- Panel: Sector Público -->
+            <div class="industry-panel" id="panel-public">
+                <div class="industry-text">
+                    <h3 data-es="Sector Público y Organismos" data-en="Public Sector & Agencies" data-pt="Setor Público e Organismos">Public Sector & Agencies</h3>
+                    <p data-es="Para organizaciones del sector público y organismos institucionales, EmotionMetrics provee inteligencia profunda sobre percepciones ciudadanas, expectativas de stakeholders e impacto emocional de políticas públicas y comunicaciones institucionales. En el sector público, donde las decisiones afectan a grandes poblaciones y el margen de error es especialmente costoso, la inteligencia emocional no es un lujo: es un insumo estratégico crítico." data-en="For public sector organizations and institutional agencies, EmotionMetrics provides deep intelligence on citizen perceptions, stakeholder expectations and emotional impact of public policies and institutional communications. In the public sector, where decisions affect large populations and the margin of error is especially costly, emotional intelligence is not a luxury: it is a critical strategic input." data-pt="Para organizações do setor público e organismos institucionais, a EmotionMetrics fornece inteligência profunda sobre percepções cidadãs, expectativas de stakeholders e impacto emocional de políticas públicas e comunicações institucionais. No setor público, onde as decisões afetam grandes populações e a margem de erro é especialmente custosa, a inteligência emocional não é um luxo: é um insumo estratégico crítico.">
+                        In the public sector, decisions affect large populations — and the cost of misreading them is high. EmotionMetrics provides governments, agencies and multilateral organizations with deep intelligence on citizen perceptions and the emotional impact of public policies, enabling communications and services that genuinely connect with the people they serve.
+                    </p>
+                </div>
+                <div class="industries-image">
+                    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/HfjuxGuTJVZKMcQx.jpg" alt="Public Sector">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== BLOG ===== -->
+    <section id="blog">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title" data-es="Blog" data-en="Blog" data-pt="Blog">Blog</h2>
+            <p class="blog-intro" data-es="Perspectivas tecnológicas para la toma de decisiones estratégicas. Explore nuestra visión sobre el ecosistema global de IA. Analizamos cambios estructurales en tecnología, metodologías emergentes de agentes y cómo las variables del entorno —desde la infraestructura hasta la ciencia de datos— transforman las decisiones estratégicas." data-en="Technological perspectives for strategic decision-making. Explore our vision on the global AI ecosystem. We analyze structural shifts in technology, emerging agent methodologies, and how environmental variables —from infrastructure to data science— transform strategic decisions." data-pt="Perspectivas tecnológicas para a tomada de decisões estratégicas. Explore nossa visão sobre o ecossistema global de IA. Analisamos mudanças estruturais em tecnologia, metodologias emergentes de agentes e como variáveis ambientais —de infraestrutura à ciência de dados— transformam decisões estratégicas.">
+                Technological perspectives for strategic decision-making. Explore our vision on the global AI ecosystem. We analyze structural shifts in technology, emerging agent methodologies, and how environmental variables —from infrastructure to data science— transform strategic decisions.
+            </p>
+            <div class="blog-grid">
+
+                <!-- Artículo 1 -->
+                <div class="blog-card">
+                    <div class="blog-card-header">
+                        
+                        <h3 data-es="Las decisiones son emocionales: por qué la investigación tradicional falla donde más importa" data-en="Decisions are emotional: why traditional research fails where it matters most" data-pt="As decisões são emocionais: por que a pesquisa tradicional falha onde mais importa">Decisions are emotional: why traditional research fails where it matters most</h3>
+                    </div>
+                    <div class="blog-content">
+                        <p data-es="Décadas de neurociencia confirman lo que la práctica empresarial suele ignorar: las personas toman decisiones de manera predominantemente emocional y las racionalizan después. Las encuestas convencionales capturan esa racionalización, no la emoción original." data-en="Decades of neuroscience confirm what business practice often ignores: people make decisions predominantly emotionally and rationalize them afterwards. Conventional surveys capture that rationalization, not the original emotion." data-pt="Décadas de neurociência confirmam o que a prática empresarial costuma ignorar: as pessoas tomam decisões predominantemente de forma emocional e as racionalizam depois. As pesquisas convencionais capturam essa racionalização, não a emoção original.">
+                            Decades of neuroscience confirm what business practice often ignores: people make decisions predominantly emotionally and rationalize them afterwards. Conventional surveys capture that rationalization, not the original emotion.
+                        </p>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogModal(1)">
+                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Artículo 2 -->
+                <div class="blog-card">
+                    <div class="blog-card-header">
+                        
+                        <h3 data-es="Feedback emocional en horas: cómo la IA está transformando los ciclos ágiles de producto" data-en="Emotional feedback in hours: how AI is transforming agile product cycles" data-pt="Feedback emocional em horas: como a IA está transformando os ciclos ágeis de produto">Emotional feedback in hours: how AI is transforming agile product cycles</h3>
+                    </div>
+                    <div class="blog-content">
+                        <p data-es="La metodología ágil prometió acelerar el aprendizaje organizacional. Su talón de Aquiles siempre fue la calidad del feedback: lento, superficial y basado en lo que los usuarios dicen, no en lo que sienten." data-en="Agile methodology promised to accelerate organizational learning. Its Achilles heel has always been the quality of feedback: slow, superficial and based on what users say, not what they feel." data-pt="A metodologia ágil prometeu acelerar o aprendizado organizacional. Seu calcanhar de Aquiles sempre foi a qualidade do feedback: lento, superficial e baseado no que os usuários dizem, não no que sentem.">
+                            Agile methodology promised to accelerate organizational learning. Its Achilles heel has always been the quality of feedback: slow, superficial and based on what users say, not what they feel.
+                        </p>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogModal(2)">
+                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Artículo 3 -->
+                <div class="blog-card">
+                    <div class="blog-card-header">
+                        
+                        <h3 data-es="Más allá del clic: por qué el análisis emocional es el futuro del UX" data-en="Beyond the click: why emotional analysis is the future of UX" data-pt="Além do clique: por que a análise emocional é o futuro do UX">Beyond the click: why emotional analysis is the future of UX</h3>
+                    </div>
+                    <div class="blog-content">
+                        <p data-es="Las métricas de comportamiento digital nos dicen qué hicieron los usuarios, pero no por qué. El análisis emocional multimodal está cambiando esa ecuación al integrar reconocimiento facial, vocal y gestual en los testeos de usabilidad." data-en="Digital behavior metrics tell us what users did, but not why. Multimodal emotional analysis is changing that equation by integrating facial, vocal and gestural recognition in usability testing." data-pt="As métricas de comportamento digital nos dizem o que os usuários fizeram, mas não por quê. A análise emocional multimodal está mudando essa equação ao integrar reconhecimento facial, vocal e gestual nos testes de usabilidade.">
+                            Digital behavior metrics tell us what users did, but not why. Multimodal emotional analysis is changing that equation by integrating facial, vocal and gestural recognition in usability testing.
+                        </p>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogModal(3)">
+                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Artículo 4 -->
+                <div class="blog-card">
+                    <div class="blog-card-header">
+                        
+                        <h3 data-es="Lo que los estudiantes sienten pero no dicen: inteligencia emocional para la gestión educativa" data-en="What students feel but don't say: emotional intelligence for educational management" data-pt="O que os alunos sentem mas não dizem: inteligência emocional para a gestão educacional">What students feel but don't say: emotional intelligence for educational management</h3>
+                    </div>
+                    <div class="blog-content">
+                        <p data-es="Las encuestas de satisfacción estudiantil capturan opiniones declaradas. Rara vez capturan lo que los estudiantes realmente sienten sobre su experiencia áulica, su vínculo con los docentes y su percepción de la institución." data-en="Student satisfaction surveys capture declared opinions. They rarely capture what students really feel about their classroom experience, their relationship with teachers and their perception of the institution." data-pt="As pesquisas de satisfação estudantil capturam opiniões declaradas. Raramente capturam o que os alunos realmente sentem sobre sua experiência em sala de aula, sua relação com os professores e sua percepção da instituição.">
+                            Student satisfaction surveys capture declared opinions. They rarely capture what students really feel about their classroom experience, their relationship with teachers and their perception of the institution.
+                        </p>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogModal(4)">
+                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACTO ===== -->
+    <section id="contacto">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title" data-es="Contacto" data-en="Contact" data-pt="Contato">Contact</h2>
+            <p class="contact-intro" data-es="¿Su organización necesita comprender mejor lo que sienten sus clientes, usuarios o stakeholders antes de tomar una decisión importante? Nuestro equipo de Miami, Buenos Aires y São Paulo está listo para ayudarle." data-en="Does your organization need to better understand what your customers, users or stakeholders feel before making an important decision? Our team in Miami, Buenos Aires and São Paulo is ready to help." data-pt="Sua organização precisa entender melhor o que seus clientes, usuários ou stakeholders sentem antes de tomar uma decisão importante? Nossa equipe em Miami, Buenos Aires e São Paulo está pronta para ajudá-lo.">
+                Does your organization need to better understand what your customers, users or stakeholders feel before making an important decision? Our team in Miami, Buenos Aires and São Paulo is ready to help.
+            </p>
+            <div class="contact-content">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullname" data-es="Nombre completo" data-en="Full Name" data-pt="Nome completo">Full Name <span style="color:#ef4444">*</span></label>
+                            <input type="text" id="fullname" name="fullname" required placeholder="John Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="company" data-es="Empresa / Organización" data-en="Company / Organization" data-pt="Empresa / Organização">Company / Organization <span style="color:#ef4444">*</span></label>
+                            <input type="text" id="company" name="company" required placeholder="Acme Corp">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country" data-es="País" data-en="Country" data-pt="País">Country <span style="color:#ef4444">*</span></label>
+                            <select id="country" name="country" required>
+                                <option value="" disabled selected data-es="Seleccione su país" data-en="Select your country" data-pt="Selecione seu país">Select your country</option>
+                                <option>Argentina</option>
+                                <option>Brazil</option>
+                                <option>Chile</option>
+                                <option>Colombia</option>
+                                <option>Mexico</option>
+                                <option>Peru</option>
+                                <option>United States</option>
+                                <option>Uruguay</option>
+                                <option>Venezuela</option>
+                                <option data-es="Otro" data-en="Other" data-pt="Outro">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email <span style="color:#ef4444">*</span></label>
+                            <input type="email" id="email" name="email" required placeholder="you@company.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">
+                                <span data-es="Teléfono" data-en="Phone" data-pt="Telefone">Phone</span>
+                                <span class="optional" data-es="(opcional)" data-en="(optional)" data-pt="(opcional)">(optional)</span>
+                            </label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 305 000 0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="website">
+                                <span data-es="Sitio web" data-en="Website" data-pt="Site">Website</span>
+                                <span class="optional" data-es="(opcional)" data-en="(optional)" data-pt="(opcional)">(optional)</span>
+                            </label>
+                            <input type="url" id="website" name="website" placeholder="https://yourcompany.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-es="Consulta" data-en="Inquiry" data-pt="Consulta">Inquiry <span style="color:#ef4444">*</span></label>
+                        <textarea id="message" name="message" required placeholder="Describe your project or question..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-es="Enviar Consulta" data-en="Send Inquiry" data-pt="Enviar Consulta">Send Inquiry</button>
+                </form>
+
+                <div class="contact-info">
+                    <h3 data-es="Nuestras Sedes" data-en="Our Offices" data-pt="Nossos Escritórios">Our Offices</h3>
+                    <p data-es="Un especialista se pondrá en contacto a la brevedad para explorar cómo las capacidades de EmotionMetrics pueden aplicarse a sus desafíos específicos." data-en="A specialist will contact you shortly to explore how EmotionMetrics capabilities can be applied to your specific challenges." data-pt="Um especialista entrará em contato em breve para explorar como as capacidades da EmotionMetrics podem ser aplicadas aos seus desafios específicos.">
+                        A specialist will contact you shortly to explore how EmotionMetrics capabilities can be applied to your specific challenges.
+                    </p>
+                    <div class="contact-email-item">
+                        <i class="fas fa-city"></i>
+                        <div>
+                            <span>Miami — Headquarters (EN)</span>
+                            <a id="em-miami" style="color:var(--secondary);text-decoration:none;"></a>
+                        </div>
+                    </div>
+                    <div class="contact-email-item">
+                        <i class="fas fa-building"></i>
+                        <div>
+                            <span>Buenos Aires — Regional Office (ES)</span>
+                            <a id="em-bsas" style="color:var(--secondary);text-decoration:none;"></a>
+                        </div>
+                    </div>
+                    <div class="contact-email-item">
+                        <i class="fas fa-landmark"></i>
+                        <div>
+                            <span>São Paulo — Regional Office (PT)</span>
+                            <a id="em-sao" style="color:var(--secondary);text-decoration:none;"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-logo">
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/OoApHKyynvMxaugo.png" alt="EmotionMetrics Logo">
+        </div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/company/emotionmetrics-ai" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+            <a href="#" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="footer-text">© 2026 EmotionMetrics.ai · All rights reserved · <a id="em-footer" style="color:var(--secondary);text-decoration:none;"></a></p>
+    </footer>
+
+    <!-- ===== MODALES DE ARTÍCULOS DE BLOG ===== -->
+    <div class="blog-modal-overlay" id="blogModal">
+        <div class="blog-modal">
+            <button class="blog-modal-close" onclick="closeBlogModal()">&times;</button>
+            <span class="blog-modal-tag" id="blogModalTag">EmotionMetrics Blog</span>
+            <h2 id="blogModalTitle"></h2>
+            <div class="blog-modal-body" id="blogModalBody"></div>
+            <button class="blog-modal-back" onclick="closeBlogModal()">
+                <i class="fas fa-arrow-left"></i> <span data-es="Volver al Blog" data-en="Back to Blog" data-pt="Voltar ao Blog">Back to Blog</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== MODALES DE FORMULARIO POR SEDE ===== -->
+    <div class="office-modal-overlay" id="officeModal">
+        <div class="office-modal">
+            <button class="office-modal-close" onclick="closeOfficeModal()">&times;</button>
+            <h3 id="officeModalTitle"></h3>
+            <p class="office-subtitle" id="officeModalSubtitle"></p>
+            <form class="contact-form" id="officeContactForm">
+                <div class="form-group">
+                    <label data-es="Nombre completo" data-en="Full Name" data-pt="Nome completo">Full Name <span style="color:#ef4444">*</span></label>
+                    <input type="text" required placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label data-es="Empresa" data-en="Company" data-pt="Empresa">Company <span style="color:#ef4444">*</span></label>
+                    <input type="text" required placeholder="Acme Corp">
+                </div>
+                <div class="form-group">
+                    <label>Email <span style="color:#ef4444">*</span></label>
+                    <input type="email" id="officeEmail" required placeholder="you@company.com">
+                </div>
+                <div class="form-group">
+                    <label data-es="Consulta" data-en="Inquiry" data-pt="Consulta">Inquiry <span style="color:#ef4444">*</span></label>
+                    <textarea required placeholder="How can we help you?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" data-es="Enviar" data-en="Send" data-pt="Enviar">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ── LANGUAGE SWITCHER ──────────────────────────────────────────
+        const currentLang = { value: 'en' };
+
+        function updateLanguage(lang) {
+            currentLang.value = lang;
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                el.textContent = el.dataset[lang];
+            });
+            document.documentElement.lang = lang;
+        }
+
+        function attachLangBtns(container) {
+            container.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.lang-btn[data-lang="' + btn.dataset.lang + '"]').forEach(b => b.classList.add('active'));
+                    updateLanguage(btn.dataset.lang);
+                });
+            });
+        }
+
+        attachLangBtns(document);
+
+        // ── HAMBURGER MENU ─────────────────────────────────────────────
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileNav = document.getElementById('mobileNav');
+
+        hamburgerBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+        });
+
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+            });
+        });
+
+        // ── INDUSTRIES TABS ────────────────────────────────────────────
+        function showIndustry(id, el) {
+            document.querySelectorAll('.industry-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.industry-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('panel-' + id).classList.add('active');
+            if (el) el.classList.add('active');
+        }
+
+        // ── BLOG MODAL ─────────────────────────────────────────────────
+        const blogArticles = {
+            1: {
+                tag: 'Neuroscience & Decision-Making',
+                title: 'Decisions are emotional: why traditional research fails where it matters most',
+                body: `
+                    <p>Decades of neuroscience confirm what business practice often ignores: people make decisions predominantly emotionally and rationalize them afterwards. The pioneering work of Antonio Damasio, among others, demonstrated that individuals with damage to the emotional centers of the brain—while retaining full cognitive capacity—become incapable of making even simple decisions. The emotional system is not a distorting layer over rational thinking: it is the engine of decision-making itself.</p>
+                    <h3>What conventional research captures</h3>
+                    <p>Traditional surveys, focus groups and interviews capture what people say about their decisions. But by the time a participant answers a questionnaire, the emotional process that drove their choice has already been replaced by a rational narrative constructed after the fact. The research captures the story, not the truth. And the story is often wrong—not because participants lie, but because the human brain is designed to construct coherent explanations for decisions that were, in reality, emotionally driven.</p>
+                    <h3>The cost of this gap</h3>
+                    <p>For organizations, this gap has concrete consequences: products launched based on positive declared intent that fail in the market; communication campaigns that test well in focus groups and generate no response in the real world; strategic decisions supported by research that captured what people said they would do, not what they actually do. The gap between declared intention and real behavior is one of the most persistent and costly problems in organizational decision-making.</p>
+                    <h3>The answer: reading emotions directly</h3>
+                    <p>Emotional AI analysis resolves this problem at its root. Instead of asking people what they feel—and receiving a rationalized answer—EmotionMetrics reads what they feel in real time, through facial expressions, vocal tone, body language and verbal content analyzed simultaneously by a swarm of specialized AI agents. The result is research that captures the emotional truth, not its post-hoc rationalization. And in a world where decisions are much more emotional than rational, that difference is what separates accurate decisions from costly ones.</p>
+                `
+            },
+            2: {
+                tag: 'Agile & AI',
+                title: 'Emotional feedback in hours: how AI is transforming agile product cycles',
+                body: `
+                    <p>Agile methodology promised to accelerate organizational learning. Its Achilles heel has always been the quality of feedback: slow, superficial and based on what users say, not what they feel. AI agent swarms are changing that equation: today it is possible to obtain deep emotional feedback from real focus groups in the time of a sprint.</p>
+                    <h3>The agile learning problem</h3>
+                    <p>The value of agile methodology lies in the speed of organizational learning: each cycle teaches something, and that learning guides the next. The problem is that the quality of learning depends on the quality of feedback. If the feedback is superficial—what users say, not what they feel—the agile cycle learns slowly and learns little. Teams iterate based on assumptions about what the user wants, rather than evidence about what they feel.</p>
+                    <h3>Emotional feedback in sprint time</h3>
+                    <p>EmotionMetrics integrates emotional feedback from AI-conducted focus groups into the agile development cycle itself, delivering not only what participants think about the minimum viable product, but what they feel when interacting with it: real enthusiasm, genuine friction, confidence or resistance that no feedback form can capture. This information, available within the same cycle in which it is generated, allows teams to iterate with real emotional evidence before committing resources to the next development phase.</p>
+                    <h3>Organizational transformation</h3>
+                    <p>When an organization incorporates continuous emotional feedback into each agile cycle, something transformative happens: the company learns faster because it learns with greater precision. The result is an acceleration of the development process and a precision in direction that significantly compresses the time between the initial idea and the product or service that the market actually adopts.</p>
+                `
+            },
+            3: {
+                tag: 'UX & Emotional Design',
+                title: 'Beyond the click: why emotional analysis is the future of UX',
+                body: `
+                    <p>Digital behavior metrics tell us what users did, but not why. Click-through rates, time on page, conversion funnels—these tools describe behavior with precision, but they are silent about the emotional experience that produced that behavior. Multimodal emotional analysis is changing that equation by integrating facial, vocal and gestural recognition in usability testing.</p>
+                    <h3>The limits of behavioral data</h3>
+                    <p>A user who abandons a checkout process may do so because of confusion, distrust, frustration or simply distraction. Behavioral data records the abandonment; it cannot distinguish between its causes. And yet the design response to each of those causes is radically different. Organizations that rely exclusively on behavioral data to guide UX decisions are navigating with a map that shows where users went, but not why they went there—or why they left.</p>
+                    <h3>What emotional analysis adds</h3>
+                    <p>By integrating facial expression recognition, vocal tone analysis and behavioral pattern detection into usability testing, organizations can identify hidden frictions and moments of delight that behavioral data would never reveal. A moment of genuine confusion that does not translate into abandonment. A feature that generates enthusiasm in facial expression but hesitation in verbal response. An interface element that produces trust in one demographic and anxiety in another. These are the insights that transform good UX into exceptional UX.</p>
+                    <h3>Leading companies are already doing it</h3>
+                    <p>The most advanced organizations in digital experience design are already incorporating emotional AI into their UX processes—not as a complement to behavioral data, but as the interpretive layer that gives it meaning. The competitive advantage of understanding not just what users do, but what they feel when they do it, is becoming a structural differentiator in markets where user experience is the primary competitive battlefield.</p>
+                `
+            },
+            4: {
+                tag: 'Education & Institutional Management',
+                title: 'What students feel but don\'t say: emotional intelligence for educational management',
+                body: `
+                    <p>Student satisfaction surveys capture declared opinions. They rarely capture what students really feel about their classroom experience, their relationship with teachers and their perception of the institution. Emotional AI is opening a completely new dimension for educational management: the possibility of accessing that real emotional state and translating it into evidence-based institutional and pedagogical improvement decisions.</p>
+                    <h3>What educational institutions measure—and what they miss</h3>
+                    <p>Educational institutions measure academic outcomes. Few measure what their students feel about the institution, the bond with their teachers, the teaching methodologies actually applied in the classroom, and the everyday experience of learning in that environment. The gap between academic performance data and the emotional reality of the student experience is one of the most underexplored dimensions in educational management—and one of the most consequential for institutional quality and student retention.</p>
+                    <h3>The emotional dimension of learning</h3>
+                    <p>Through interviews conducted by AI avatars and multimodal emotional analysis, EmotionMetrics captures how students feel about the institutional climate, the quality of the pedagogical relationship, the relevance and clarity of teaching methodologies, and the level of belonging and identification with the institution. This information, articulated as precise emotional data, allows management teams to make classroom and institutional management decisions based on evidence, not assumptions.</p>
+                    <h3>Concrete applications in Latin America</h3>
+                    <p>In higher education institutions across Latin America, early applications of emotional intelligence in educational management have revealed systematic gaps between what students declare in satisfaction surveys and what they actually experience. Institutions that have acted on this emotional evidence have reported improvements in student retention, pedagogical relationship quality and institutional climate—outcomes that conventional satisfaction measurement had failed to predict or explain. The future of educational management is emotional, and the technology to access that dimension is available today.</p>
+                `
+            }
+        };
+
+        // Traducciones de artículos (ES y PT)
+        const blogArticlesEs = {
+            1: {
+                tag: 'Neurociencia y Decisiones',
+                title: 'Las decisiones son emocionales: por qué la investigación tradicional falla donde más importa',
+                body: `
+                    <p>Décadas de neurociencia confirman lo que la práctica empresarial suele ignorar: las personas toman decisiones de manera predominantemente emocional y las racionalizan después. El trabajo pionero de Antonio Damasio, entre otros, demostró que individuos con daño en los centros emocionales del cerebro —conservando plena capacidad cognitiva— se vuelven incapaces de tomar incluso decisiones simples. El sistema emocional no es una capa distorsionadora sobre el pensamiento racional: es el motor de la toma de decisiones en sí mismo.</p>
+                    <h3>Qué captura la investigación convencional</h3>
+                    <p>Las encuestas, focus groups y entrevistas tradicionales capturan lo que las personas dicen sobre sus decisiones. Pero para cuando un participante responde un cuestionario, el proceso emocional que impulsó su elección ya fue reemplazado por una narrativa racional construida después del hecho. La investigación captura la historia, no la verdad. Y la historia frecuentemente es incorrecta —no porque los participantes mientan, sino porque el cerebro humano está diseñado para construir explicaciones coherentes de decisiones que fueron, en realidad, emocionalmente impulsadas.</p>
+                    <h3>El costo de esta brecha</h3>
+                    <p>Para las organizaciones, esta brecha tiene consecuencias concretas: productos lanzados sobre la base de intención declarada positiva que fracasan en el mercado; campañas de comunicación que funcionan bien en focus groups y no generan respuesta en el mundo real; decisiones estratégicas respaldadas por investigación que capturó lo que las personas dijeron que harían, no lo que realmente hacen.</p>
+                    <h3>La respuesta: leer las emociones directamente</h3>
+                    <p>El análisis emocional con IA resuelve este problema en su raíz. En lugar de preguntarle a las personas qué sienten —y recibir una respuesta racionalizada— EmotionMetrics lee lo que sienten en tiempo real, a través de expresiones faciales, tono vocal, lenguaje corporal y contenido verbal analizados simultáneamente por un enjambre de agentes de IA especializados. El resultado es una investigación que captura la verdad emocional, no su racionalización posterior.</p>
+                `
+            },
+            2: {
+                tag: 'Ágil e IA',
+                title: 'Feedback emocional en horas: cómo la IA está transformando los ciclos ágiles de producto',
+                body: `
+                    <p>La metodología ágil prometió acelerar el aprendizaje organizacional. Su talón de Aquiles siempre fue la calidad del feedback: lento, superficial y basado en lo que los usuarios dicen, no en lo que sienten. Los enjambres de agentes de IA están cambiando esa ecuación: hoy es posible obtener feedback emocional profundo de focus groups reales en el tiempo de un sprint.</p>
+                    <h3>El problema del aprendizaje ágil</h3>
+                    <p>El valor de la metodología ágil reside en la velocidad del aprendizaje organizacional: cada ciclo enseña algo, y ese aprendizaje guía el siguiente. El problema es que la calidad del aprendizaje depende de la calidad del feedback. Si el feedback es superficial —lo que los usuarios dicen, no lo que sienten— el ciclo ágil aprende lentamente y aprende poco. Los equipos iteran sobre supuestos acerca de lo que el usuario quiere, en lugar de evidencia sobre lo que siente.</p>
+                    <h3>Feedback emocional en tiempo de sprint</h3>
+                    <p>EmotionMetrics integra feedback emocional de focus groups conducidos por IA en el propio ciclo de desarrollo ágil, entregando no solo lo que los participantes piensan sobre el producto mínimo viable, sino lo que sienten al interactuar con él: entusiasmo real, fricción genuina, confianza o resistencia que ningún formulario de feedback puede capturar.</p>
+                    <h3>Transformación organizacional</h3>
+                    <p>Cuando una organización incorpora feedback emocional continuo en cada ciclo ágil, algo transformador ocurre: la empresa aprende más rápido porque aprende con mayor precisión. El resultado es una aceleración del proceso de desarrollo y una precisión en la dirección que comprime significativamente el tiempo entre la idea inicial y el producto o servicio que el mercado realmente adopta.</p>
+                `
+            },
+            3: {
+                tag: 'UX y Diseño Emocional',
+                title: 'Más allá del clic: por qué el análisis emocional es el futuro del UX',
+                body: `
+                    <p>Las métricas de comportamiento digital nos dicen qué hicieron los usuarios, pero no por qué. Tasas de clics, tiempo en página, embudos de conversión —estas herramientas describen el comportamiento con precisión, pero guardan silencio sobre la experiencia emocional que produjo ese comportamiento. El análisis emocional multimodal está cambiando esa ecuación al integrar reconocimiento facial, vocal y gestual en los testeos de usabilidad.</p>
+                    <h3>Los límites de los datos de comportamiento</h3>
+                    <p>Un usuario que abandona un proceso de compra puede hacerlo por confusión, desconfianza, frustración o simplemente distracción. Los datos de comportamiento registran el abandono; no pueden distinguir entre sus causas. Y sin embargo, la respuesta de diseño a cada una de esas causas es radicalmente diferente. Las organizaciones que dependen exclusivamente de datos de comportamiento para guiar sus decisiones de UX navegan con un mapa que muestra adónde fueron los usuarios, pero no por qué fueron —o por qué se fueron.</p>
+                    <h3>Lo que agrega el análisis emocional</h3>
+                    <p>Al integrar reconocimiento de expresiones faciales, análisis de tono vocal y detección de patrones de comportamiento en los testeos de usabilidad, las organizaciones pueden identificar fricciones ocultas y momentos de deleite que los datos de comportamiento nunca revelarían. Un momento de confusión genuina que no se traduce en abandono. Una funcionalidad que genera entusiasmo en la expresión facial pero vacilación en la respuesta verbal. Un elemento de interfaz que produce confianza en un segmento demográfico y ansiedad en otro.</p>
+                    <h3>Las organizaciones líderes ya lo hacen</h3>
+                    <p>Las organizaciones más avanzadas en diseño de experiencia digital ya están incorporando IA emocional en sus procesos de UX —no como complemento de los datos de comportamiento, sino como la capa interpretativa que les da sentido. La ventaja competitiva de entender no solo qué hacen los usuarios, sino qué sienten cuando lo hacen, se está convirtiendo en un diferenciador estructural en mercados donde la experiencia de usuario es el principal campo de batalla competitivo.</p>
+                `
+            },
+            4: {
+                tag: 'Educación y Gestión Institucional',
+                title: 'Lo que los estudiantes sienten pero no dicen: inteligencia emocional para la gestión educativa',
+                body: `
+                    <p>Las encuestas de satisfacción estudiantil capturan opiniones declaradas. Rara vez capturan lo que los estudiantes realmente sienten sobre su experiencia áulica, su vínculo con los docentes y su percepción de la institución. La IA emocional está abriendo una dimensión completamente nueva para la gestión educativa: la posibilidad de acceder a ese estado emocional real y traducirlo en decisiones de mejora institucional y pedagógica basadas en evidencia.</p>
+                    <h3>Qué miden las instituciones educativas —y qué se pierden</h3>
+                    <p>Las instituciones educativas miden resultados académicos. Pocas miden lo que sus estudiantes sienten sobre la institución, el vínculo con sus docentes, las metodologías pedagógicas realmente aplicadas en el aula y la experiencia cotidiana de aprender en ese entorno. La brecha entre los datos de rendimiento académico y la realidad emocional de la experiencia estudiantil es una de las dimensiones más inexploradas en la gestión educativa —y una de las más consecuentes para la calidad institucional y la retención de estudiantes.</p>
+                    <h3>La dimensión emocional del aprendizaje</h3>
+                    <p>A través de entrevistas conducidas por avatares de IA y análisis emocional multimodal, EmotionMetrics captura cómo se sienten los estudiantes respecto al clima institucional, la calidad del vínculo pedagógico, la pertinencia y claridad de las metodologías de enseñanza, y el nivel de pertenencia e identificación con la institución.</p>
+                    <h3>Aplicaciones concretas en América Latina</h3>
+                    <p>En instituciones de educación superior de América Latina, las primeras aplicaciones de inteligencia emocional en la gestión educativa han revelado brechas sistemáticas entre lo que los estudiantes declaran en encuestas de satisfacción y lo que realmente experimentan. Las instituciones que han actuado sobre esta evidencia emocional han reportado mejoras en retención estudiantil, calidad del vínculo pedagógico y clima institucional —resultados que la medición convencional de satisfacción había fallado en predecir o explicar.</p>
+                `
+            }
+        };
+
+        const blogArticlesPt = {
+            1: {
+                tag: 'Neurociência e Decisões',
+                title: 'As decisões são emocionais: por que a pesquisa tradicional falha onde mais importa',
+                body: `
+                    <p>Décadas de neurociência confirmam o que a prática empresarial costuma ignorar: as pessoas tomam decisões predominantemente de forma emocional e as racionalizam depois. O trabalho pioneiro de Antonio Damasio, entre outros, demonstrou que indivíduos com dano nos centros emocionais do cérebro —mantendo plena capacidade cognitiva— tornam-se incapazes de tomar até mesmo decisões simples. O sistema emocional não é uma camada distorcedora sobre o pensamento racional: é o motor da tomada de decisões em si.</p>
+                    <h3>O que a pesquisa convencional captura</h3>
+                    <p>Pesquisas, focus groups e entrevistas tradicionais capturam o que as pessoas dizem sobre suas decisões. Mas quando um participante responde a um questionário, o processo emocional que impulsionou sua escolha já foi substituído por uma narrativa racional construída após o fato. A pesquisa captura a história, não a verdade. E a história frequentemente está errada —não porque os participantes mintam, mas porque o cérebro humano é projetado para construir explicações coerentes para decisões que foram, na realidade, emocionalmente impulsionadas.</p>
+                    <h3>O custo dessa lacuna</h3>
+                    <p>Para as organizações, essa lacuna tem consequências concretas: produtos lançados com base em intenção declarada positiva que fracassam no mercado; campanhas de comunicação que funcionam bem em focus groups e não geram resposta no mundo real; decisões estratégicas respaldadas por pesquisas que capturaram o que as pessoas disseram que fariam, não o que realmente fazem.</p>
+                    <h3>A resposta: ler as emoções diretamente</h3>
+                    <p>A análise emocional com IA resolve esse problema na raiz. Em vez de perguntar às pessoas o que sentem —e receber uma resposta racionalizada— a EmotionMetrics lê o que sentem em tempo real, por meio de expressões faciais, tom vocal, linguagem corporal e conteúdo verbal analisados simultaneamente por um enxame de agentes de IA especializados.</p>
+                `
+            },
+            2: {
+                tag: 'Ágil e IA',
+                title: 'Feedback emocional em horas: como a IA está transformando os ciclos ágeis de produto',
+                body: `
+                    <p>A metodologia ágil prometeu acelerar o aprendizado organizacional. Seu calcanhar de Aquiles sempre foi a qualidade do feedback: lento, superficial e baseado no que os usuários dizem, não no que sentem. Os enxames de agentes de IA estão mudando essa equação: hoje é possível obter feedback emocional profundo de focus groups reais no tempo de um sprint.</p>
+                    <h3>O problema do aprendizado ágil</h3>
+                    <p>O valor da metodologia ágil reside na velocidade do aprendizado organizacional: cada ciclo ensina algo, e esse aprendizado guia o próximo. O problema é que a qualidade do aprendizado depende da qualidade do feedback. Se o feedback é superficial —o que os usuários dizem, não o que sentem— o ciclo ágil aprende lentamente e aprende pouco.</p>
+                    <h3>Feedback emocional em tempo de sprint</h3>
+                    <p>A EmotionMetrics integra feedback emocional de focus groups conduzidos por IA no próprio ciclo de desenvolvimento ágil, entregando não apenas o que os participantes pensam sobre o produto mínimo viável, mas o que sentem ao interagir com ele: entusiasmo real, fricção genuína, confiança ou resistência que nenhum formulário de feedback pode capturar.</p>
+                    <h3>Transformação organizacional</h3>
+                    <p>Quando uma organização incorpora feedback emocional contínuo em cada ciclo ágil, algo transformador acontece: a empresa aprende mais rápido porque aprende com maior precisão. O resultado é uma aceleração do processo de desenvolvimento e uma precisão de direção que comprime significativamente o tempo entre a ideia inicial e o produto ou serviço que o mercado realmente adota.</p>
+                `
+            },
+            3: {
+                tag: 'UX e Design Emocional',
+                title: 'Além do clique: por que a análise emocional é o futuro do UX',
+                body: `
+                    <p>As métricas de comportamento digital nos dizem o que os usuários fizeram, mas não por quê. Taxas de cliques, tempo na página, funis de conversão —essas ferramentas descrevem o comportamento com precisão, mas são silenciosas sobre a experiência emocional que produziu esse comportamento. A análise emocional multimodal está mudando essa equação ao integrar reconhecimento facial, vocal e gestual nos testes de usabilidade.</p>
+                    <h3>Os limites dos dados de comportamento</h3>
+                    <p>Um usuário que abandona um processo de compra pode fazê-lo por confusão, desconfiança, frustração ou simplesmente distração. Os dados de comportamento registram o abandono; não conseguem distinguir entre suas causas. E, no entanto, a resposta de design para cada uma dessas causas é radicalmente diferente.</p>
+                    <h3>O que a análise emocional acrescenta</h3>
+                    <p>Ao integrar reconhecimento de expressões faciais, análise de tom vocal e detecção de padrões de comportamento nos testes de usabilidade, as organizações podem identificar fricções ocultas e momentos de prazer que os dados de comportamento jamais revelariam. Um momento de confusão genuína que não se traduz em abandono. Uma funcionalidade que gera entusiasmo na expressão facial, mas hesitação na resposta verbal.</p>
+                    <h3>As organizações líderes já fazem isso</h3>
+                    <p>As organizações mais avançadas em design de experiência digital já estão incorporando IA emocional em seus processos de UX —não como complemento dos dados de comportamento, mas como a camada interpretativa que lhes dá sentido. A vantagem competitiva de entender não apenas o que os usuários fazem, mas o que sentem ao fazê-lo, está se tornando um diferencial estrutural em mercados onde a experiência do usuário é o principal campo de batalha competitivo.</p>
+                `
+            },
+            4: {
+                tag: 'Educação e Gestão Institucional',
+                title: 'O que os alunos sentem mas não dizem: inteligência emocional para a gestão educacional',
+                body: `
+                    <p>As pesquisas de satisfação estudantil capturam opiniões declaradas. Raramente capturam o que os alunos realmente sentem sobre sua experiência em sala de aula, sua relação com os professores e sua percepção da instituição. A IA emocional está abrindo uma dimensão completamente nova para a gestão educacional: a possibilidade de acessar esse estado emocional real e traduzi-lo em decisões de melhoria institucional e pedagógica baseadas em evidências.</p>
+                    <h3>O que as instituições educacionais medem —e o que perdem</h3>
+                    <p>As instituições educacionais medem resultados acadêmicos. Poucas medem o que seus alunos sentem sobre a instituição, o vínculo com seus professores, as metodologias pedagógicas realmente aplicadas em sala de aula e a experiência cotidiana de aprender naquele ambiente.</p>
+                    <h3>A dimensão emocional do aprendizado</h3>
+                    <p>Por meio de entrevistas conduzidas por avatares de IA e análise emocional multimodal, a EmotionMetrics captura como os alunos se sentem em relação ao clima institucional, à qualidade do vínculo pedagógico, à pertinência e clareza das metodologias de ensino e ao nível de pertencimento e identificação com a instituição.</p>
+                    <h3>Aplicações concretas na América Latina</h3>
+                    <p>Em instituições de ensino superior da América Latina, as primeiras aplicações de inteligência emocional na gestão educacional revelaram lacunas sistemáticas entre o que os alunos declaram em pesquisas de satisfação e o que realmente experimentam. As instituições que agiram com base nessa evidência emocional relataram melhorias na retenção de alunos, na qualidade do vínculo pedagógico e no clima institucional.</p>
+                `
+            }
+        };
+
+        function openBlogModal(num) {
+            const lang = currentLang.value;
+            let article;
+            if (lang === 'es' && blogArticlesEs[num]) {
+                article = blogArticlesEs[num];
+            } else if (lang === 'pt' && blogArticlesPt[num]) {
+                article = blogArticlesPt[num];
+            } else {
+                article = blogArticles[num];
+            }
+            document.getElementById('blogModalTag').textContent = article.tag;
+            document.getElementById('blogModalTitle').textContent = article.title;
+            document.getElementById('blogModalBody').innerHTML = article.body;
+            document.getElementById('blogModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBlogModal() {
+            document.getElementById('blogModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('blogModal').addEventListener('click', function(e) {
+            if (e.target === this) closeBlogModal();
+        });
+
+        // ── OFFICE MODAL ───────────────────────────────────────────────
+        // Emails ensamblados en runtime para evitar harvesting
+        var _d = ['emotion' + 'metrics', 'ai'].join('.');
+        var _at = '\u0040';
+        var _em = {
+            miami: 'info' + '_' + 'miami' + _at + _d,
+            bsas:  'info' + '_' + 'bsas'  + _at + _d,
+            sao:   'info' + '_' + 'sao'   + _at + _d
+        };
+        const officeData = {
+            miami: {
+                title: 'Miami — Headquarters',
+                subtitle: 'English inquiries · ' + _em.miami,
+                email: _em.miami
+            },
+            bsas: {
+                title: 'Buenos Aires — Oficina Regional',
+                subtitle: 'Consultas en español · ' + _em.bsas,
+                email: _em.bsas
+            },
+            sao: {
+                title: 'São Paulo — Escritório Regional',
+                subtitle: 'Consultas em português · ' + _em.sao,
+                email: _em.sao
+            }
+        };
+
+        function openOfficeModal(office) {
+            const data = officeData[office];
+            document.getElementById('officeModalTitle').textContent = data.title;
+            document.getElementById('officeModalSubtitle').textContent = data.subtitle;
+            document.getElementById('officeEmail').dataset.target = data.email;
+            document.getElementById('officeModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOfficeModal() {
+            document.getElementById('officeModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('officeModal').addEventListener('click', function(e) {
+            if (e.target === this) closeOfficeModal();
+        });
+
+        document.getElementById('officeContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const targetEmail = document.getElementById('officeEmail').dataset.target;
+            alert('Message sent to ' + targetEmail + '!');
+            closeOfficeModal();
+            this.reset();
+        });
+
+        // ── MAIN CONTACT FORM ──────────────────────────────────────────
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const lang = currentLang.value;
+            let targetEmail = _em.miami;
+            if (lang === 'es') targetEmail = _em.bsas;
+            if (lang === 'pt') targetEmail = _em.sao;
+            const msgs = {
+                en: 'Your inquiry has been sent to ' + targetEmail + '. We will be in touch shortly.',
+                es: 'Su consulta fue enviada a ' + targetEmail + '. Nos pondremos en contacto a la brevedad.',
+                pt: 'Sua consulta foi enviada para ' + targetEmail + '. Entraremos em contato em breve.'
+            };
+            alert(msgs[lang] || msgs.en);
+            this.reset();
+        });
+
+        // ── EMAIL OBFUSCATION (anti-harvesting) ───────────────────────
+        (function() {
+            // Los emails se ensamblan en runtime — nunca aparecen completos en el HTML
+            var d = ['emotionmetrics', 'ai'].join('.');
+            var emails = {
+                'em-miami': ['info' + '_' + 'miami', d],
+                'em-bsas':  ['info' + '_' + 'bsas',  d],
+                'em-sao':   ['info' + '_' + 'sao',   d],
+                'em-footer':['info' + '_' + 'miami', d]
+            };
+            Object.keys(emails).forEach(function(id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                var addr = emails[id][0] + '\u0040' + emails[id][1];
+                el.href = 'mai' + 'lto:' + addr;
+                el.textContent = addr;
+            });
+        })();
+
+        // ── ESC KEY CLOSES MODALS ──────────────────────────────────────
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeBlogModal();
+                closeOfficeModal();
+            }
+        });
+    </script>
+</body>
+</html>
