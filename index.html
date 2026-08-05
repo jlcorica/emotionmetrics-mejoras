@@ -773,6 +773,34 @@
 
         .blog-modal-back:hover { gap: 14px; }
 
+        .blog-modal-body figure {
+            margin: 28px 0;
+        }
+
+        .blog-modal-body figure img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .blog-modal-body figcaption {
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            opacity: 0.75;
+            font-style: italic;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        .blog-card-image {
+            width: 100%;
+            aspect-ratio: 5 / 2;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
         /* ===== CONTACTO ===== */
         .contact-content {
             display: grid;
@@ -1362,6 +1390,7 @@
                         <h3 data-es="Las decisiones son emocionales: por qué la investigación tradicional falla donde más importa" data-en="Decisions are emotional: why traditional research fails where it matters most" data-pt="As decisões são emocionais: por que a pesquisa tradicional falha onde mais importa">Decisions are emotional: why traditional research fails where it matters most</h3>
                     </div>
                     <div class="blog-content">
+                        <img class="blog-card-image" src="https://images.unsplash.com/photo-1533073526757-2c8ca1df9f1c?w=900&h=360&fit=crop&q=80&auto=format" alt="Silueta de un cartel de señalización en la hora dorada, simbolizando una decisión">
                         <p data-es="Décadas de neurociencia confirman lo que la práctica empresarial suele ignorar: las personas toman decisiones de manera predominantemente emocional y las racionalizan después. Las encuestas convencionales capturan esa racionalización, no la emoción original." data-en="Decades of neuroscience confirm what business practice often ignores: people make decisions predominantly emotionally and rationalize them afterwards. Conventional surveys capture that rationalization, not the original emotion." data-pt="Décadas de neurociência confirmam o que a prática empresarial costuma ignorar: as pessoas tomam decisões predominantemente de forma emocional e as racionalizam depois. As pesquisas convencionais capturam essa racionalização, não a emoção original.">
                             Decades of neuroscience confirm what business practice often ignores: people make decisions predominantly emotionally and rationalize them afterwards. Conventional surveys capture that rationalization, not the original emotion.
                         </p>
@@ -1631,7 +1660,15 @@
                     <h3>Are we asking the right question?</h3>
                     <p>Many remember the Pepsi Challenge, the campaign with which Pepsi surprised the market in the 1970s. The test seemed simple. Two unmarked cups. A sip of each drink. Then, a single question: which do you prefer?</p>
                     <p>In a large number of trials, participants chose Pepsi. Yet when it came time to buy a soda to take home, millions of consumers kept choosing Coca-Cola. For years that apparent contradiction fueled one of marketing's best-known debates.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1535588926957-dc13fb410d88?w=1200&h=675&fit=crop&q=80&auto=format" alt="Cola being poured into a glass">
+                        <figcaption>The Pepsi Challenge: in a blind test people preferred Pepsi, yet kept buying Coca-Cola to take home.</figcaption>
+                    </figure>
                     <p>Decades later, a study led by Samuel McClure offered a much deeper explanation. Using functional magnetic resonance imaging, his team observed that brain activity changed significantly when participants knew which brand they were drinking. The experience no longer depended solely on taste. Memory, expectations and the meaning each brand had acquired for those people over their lifetime were also at play¹.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1666214280352-db292c05fd80?w=1200&h=675&fit=crop&q=80&auto=format" alt="An MRI scanner machine in an exam room">
+                        <figcaption>Samuel McClure's study showed the brain reacts differently depending on which brand it believes it's drinking.</figcaption>
+                    </figure>
                     <p>The experiment did not prove that one drink was objectively better than the other. It showed something far more interesting: deciding which tastes better after one sip is not the same as deciding which one we want to bring home.</p>
                     <p>In the second decision, factors appear that were absent from the first: memories, habits, prior experiences, identity, context and emotional associations built up over years. The question, then, stops being simply which drink a person prefers. It becomes another question: are we observing the decision… or only a part of it?</p>
                     <h3>An idea so intuitive it was almost never questioned</h3>
@@ -1661,6 +1698,10 @@
                     <p>The problem stopped being about obtaining information. The real challenge is integrating it. For decades researchers had to choose: analyze the speech, or analyze body language, or analyze the voice. Each dimension was studied separately. Human experience, however, never happens that way.</p>
                     <h3>The rise of multimodal artificial intelligence</h3>
                     <p>Contemporary AI models introduce a completely different possibility. For the first time it is technically feasible to analyze, in sync, multiple channels of information generated during a single interaction: text, audio, video, facial expression, body movement, vocal prosody.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1200&h=675&fit=crop&q=80&auto=format" alt="Two people having an animated, expressive conversation">
+                        <figcaption>Text, voice, face and body, analyzed simultaneously during a single conversation.</figcaption>
+                    </figure>
                     <p>Not because any single one of those channels reveals "the truth" about a person on its own. But because combining them makes it possible to describe the communicative process with far greater richness.</p>
                     <p>The difference is fundamental. For years we asked what a person said. Now we can also observe how they said it, when they hesitated, which emotions seemed to accompany certain statements, how their level of engagement changed throughout the conversation, and what patterns appeared consistently across hundreds or thousands of participants. We are not replacing speech. We are adding context to it.</p>
                     <h3>From measuring responses to observing processes</h3>
@@ -1669,6 +1710,10 @@
                     <p>The object of study is no longer just what people answer. It becomes how they evolve while answering.</p>
                     <h3>A difference comparable to the arrival of video</h3>
                     <p>There's a useful analogy. For centuries it was possible to study movement through drawings. A drawing could precisely represent a runner's position. But never the movement itself. The arrival of photography allowed capturing an instant. The arrival of cinema allowed observing the complete process.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=1200&h=675&fit=crop&q=80&auto=format" alt="A reel of cinema film">
+                        <figcaption>From photography to cinema: from capturing an instant to observing the full process.</figcaption>
+                    </figure>
                     <p>Something similar may be happening with behavioral research. Surveys remain extraordinarily valuable. Interviews remain indispensable. But both function, in a sense, like photographs: they capture moments.</p>
                     <p>Multimodal AI is beginning to offer something different: not one more photograph, but the possibility of observing the entire sequence. It doesn't replace traditional methodologies. It complements them.</p>
                     <h3>The risk of technological fascination</h3>
@@ -1738,7 +1783,15 @@
                     <h3>¿Estamos haciendo la pregunta correcta?</h3>
                     <p>Muchos recuerdan el Pepsi Challenge, la campaña con la que Pepsi sorprendió al mercado en la década de 1970. La prueba parecía sencilla. Dos vasos sin identificar. Un sorbo de cada bebida. Después, una única pregunta: ¿cuál prefiere?</p>
                     <p>En una gran cantidad de pruebas, los participantes elegían Pepsi. Sin embargo, cuando llegaba el momento de comprar una gaseosa para llevar a casa, millones de consumidores seguían eligiendo Coca-Cola. Durante años aquella aparente contradicción alimentó uno de los debates más conocidos del marketing.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1535588926957-dc13fb410d88?w=1200&h=675&fit=crop&q=80&auto=format" alt="Gaseosa cola siendo servida en un vaso">
+                        <figcaption>El Pepsi Challenge: en una prueba a ciegas la gente prefería Pepsi, pero seguía comprando Coca-Cola para su casa.</figcaption>
+                    </figure>
                     <p>Décadas después, un estudio liderado por Samuel McClure aportó una explicación mucho más profunda. Utilizando resonancia magnética funcional, su equipo observó que la actividad cerebral cambiaba significativamente cuando los participantes conocían la marca que estaban consumiendo. La experiencia ya no dependía únicamente del sabor. También intervenían la memoria, las expectativas y el significado que cada marca había adquirido para esas personas a lo largo de su vida¹.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1666214280352-db292c05fd80?w=1200&h=675&fit=crop&q=80&auto=format" alt="Máquina de resonancia magnética en una sala médica">
+                        <figcaption>El estudio de Samuel McClure mostró que el cerebro reacciona distinto según la marca que cree estar consumiendo.</figcaption>
+                    </figure>
                     <p>El experimento no demostró que una bebida fuera objetivamente mejor que la otra. Mostró algo mucho más interesante: no es lo mismo decidir cuál sabe mejor después de un sorbo que decidir cuál queremos llevar a nuestra casa.</p>
                     <p>En la segunda decisión aparecen factores que no estaban presentes en la primera: recuerdos, hábitos, experiencias previas, identidad, contexto y asociaciones emocionales construidas durante años. La pregunta, entonces, deja de ser únicamente cuál bebida prefiere una persona. Empieza a ser otra: ¿estamos observando la decisión… o solamente una parte de ella?</p>
                     <h3>Una idea tan intuitiva que casi nunca fue discutida</h3>
@@ -1768,6 +1821,10 @@
                     <p>El problema dejó de ser obtener información. El verdadero desafío consiste en integrarla. Durante décadas los investigadores tuvieron que elegir: o analizaban el discurso, o analizaban el lenguaje corporal, o analizaban la voz. Cada dimensión era estudiada por separado. La experiencia humana, sin embargo, nunca ocurre de esa manera.</p>
                     <h3>La aparición de la inteligencia artificial multimodal</h3>
                     <p>Los modelos contemporáneos de inteligencia artificial introducen una posibilidad completamente distinta. Por primera vez resulta técnicamente viable analizar, de forma sincronizada, múltiples canales de información generados durante una misma interacción: texto, audio, video, expresión facial, movimiento corporal, características prosódicas de la voz.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1200&h=675&fit=crop&q=80&auto=format" alt="Dos personas conversando de manera expresiva y animada">
+                        <figcaption>Texto, voz, rostro y cuerpo, analizados en simultáneo durante una misma conversación.</figcaption>
+                    </figure>
                     <p>No porque alguno de esos canales revele por sí mismo "la verdad" sobre una persona. Sino porque la combinación entre ellos permite describir con mayor riqueza el proceso comunicacional.</p>
                     <p>La diferencia es fundamental. Durante años preguntamos qué dijo una persona. Ahora también podemos observar cómo lo dijo, cuándo dudó, qué emociones parecieron acompañar determinadas afirmaciones, cómo cambió su nivel de compromiso durante la conversación y qué patrones aparecieron de manera consistente entre cientos o miles de participantes. No estamos sustituyendo el discurso. Estamos agregándole contexto.</p>
                     <h3>De medir respuestas a observar procesos</h3>
@@ -1776,6 +1833,10 @@
                     <p>El objeto de estudio deja de ser solamente lo que las personas responden. Empieza a ser cómo evolucionan mientras responden.</p>
                     <h3>Una diferencia comparable a la aparición del video</h3>
                     <p>Existe una analogía útil. Durante siglos fue posible estudiar el movimiento mediante dibujos. Un dibujo podía representar con precisión la posición de un corredor. Pero nunca el movimiento mismo. La aparición de la fotografía permitió capturar un instante. La aparición del cine permitió observar el proceso completo.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=1200&h=675&fit=crop&q=80&auto=format" alt="Un rollo de película de cine">
+                        <figcaption>De la fotografía al cine: de capturar un instante a observar el proceso completo.</figcaption>
+                    </figure>
                     <p>Algo semejante podría estar ocurriendo con la investigación del comportamiento. Las encuestas continúan siendo extraordinariamente valiosas. Las entrevistas siguen siendo indispensables. Pero ambas funcionan, en cierto sentido, como fotografías: capturan momentos.</p>
                     <p>La inteligencia artificial multimodal comienza a ofrecer algo diferente: no una fotografía adicional, sino la posibilidad de observar la secuencia completa. No reemplaza las metodologías tradicionales. Las complementa.</p>
                     <h3>El riesgo de la fascinación tecnológica</h3>
@@ -1844,7 +1905,15 @@
                     <h3>Estamos fazendo a pergunta certa?</h3>
                     <p>Muitos se lembram do Pepsi Challenge, a campanha com a qual a Pepsi surpreendeu o mercado na década de 1970. O teste parecia simples. Dois copos sem identificação. Um gole de cada bebida. Depois, uma única pergunta: qual você prefere?</p>
                     <p>Em grande parte dos testes, os participantes escolhiam a Pepsi. No entanto, na hora de comprar um refrigerante para levar para casa, milhões de consumidores continuavam escolhendo a Coca-Cola. Durante anos, essa aparente contradição alimentou um dos debates mais conhecidos do marketing.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1535588926957-dc13fb410d88?w=1200&h=675&fit=crop&q=80&auto=format" alt="Refrigerante cola sendo servido em um copo">
+                        <figcaption>O Pepsi Challenge: em um teste às cegas as pessoas preferiam a Pepsi, mas continuavam comprando Coca-Cola para levar para casa.</figcaption>
+                    </figure>
                     <p>Décadas depois, um estudo liderado por Samuel McClure trouxe uma explicação muito mais profunda. Usando ressonância magnética funcional, sua equipe observou que a atividade cerebral mudava significativamente quando os participantes sabiam qual marca estavam consumindo. A experiência já não dependia apenas do sabor. Também entravam em jogo a memória, as expectativas e o significado que cada marca havia adquirido para essas pessoas ao longo da vida¹.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1666214280352-db292c05fd80?w=1200&h=675&fit=crop&q=80&auto=format" alt="Máquina de ressonância magnética em uma sala médica">
+                        <figcaption>O estudo de Samuel McClure mostrou que o cérebro reage de forma diferente conforme a marca que acredita estar consumindo.</figcaption>
+                    </figure>
                     <p>O experimento não provou que uma bebida fosse objetivamente melhor que a outra. Mostrou algo muito mais interessante: decidir qual tem gosto melhor depois de um gole não é o mesmo que decidir qual queremos levar para casa.</p>
                     <p>Na segunda decisão aparecem fatores que não estavam presentes na primeira: lembranças, hábitos, experiências anteriores, identidade, contexto e associações emocionais construídas ao longo de anos. A pergunta, então, deixa de ser apenas qual bebida uma pessoa prefere. Passa a ser outra: estamos observando a decisão… ou apenas uma parte dela?</p>
                     <h3>Uma ideia tão intuitiva que quase nunca foi discutida</h3>
@@ -1874,6 +1943,10 @@
                     <p>O problema deixou de ser obter informação. O verdadeiro desafio é integrá-la. Durante décadas os pesquisadores tiveram que escolher: ou analisavam o discurso, ou analisavam a linguagem corporal, ou analisavam a voz. Cada dimensão era estudada separadamente. A experiência humana, no entanto, nunca acontece dessa forma.</p>
                     <h3>O surgimento da inteligência artificial multimodal</h3>
                     <p>Os modelos contemporâneos de inteligência artificial introduzem uma possibilidade completamente diferente. Pela primeira vez torna-se tecnicamente viável analisar, de forma sincronizada, múltiplos canais de informação gerados durante uma mesma interação: texto, áudio, vídeo, expressão facial, movimento corporal, características prosódicas da voz.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1200&h=675&fit=crop&q=80&auto=format" alt="Duas pessoas em uma conversa expressiva e animada">
+                        <figcaption>Texto, voz, rosto e corpo, analisados simultaneamente durante uma mesma conversa.</figcaption>
+                    </figure>
                     <p>Não porque algum desses canais revele por si só "a verdade" sobre uma pessoa. Mas porque a combinação entre eles permite descrever com muito mais riqueza o processo comunicacional.</p>
                     <p>A diferença é fundamental. Durante anos perguntamos o que uma pessoa disse. Agora também podemos observar como disse, quando hesitou, quais emoções pareceram acompanhar determinadas afirmações, como mudou seu nível de engajamento durante a conversa e quais padrões apareceram de forma consistente entre centenas ou milhares de participantes. Não estamos substituindo o discurso. Estamos agregando contexto a ele.</p>
                     <h3>De medir respostas a observar processos</h3>
@@ -1882,6 +1955,10 @@
                     <p>O objeto de estudo deixa de ser apenas o que as pessoas respondem. Passa a ser como evoluem enquanto respondem.</p>
                     <h3>Uma diferença comparável ao surgimento do vídeo</h3>
                     <p>Existe uma analogia útil. Durante séculos foi possível estudar o movimento por meio de desenhos. Um desenho podia representar com precisão a posição de um corredor. Mas nunca o movimento em si. O surgimento da fotografia permitiu capturar um instante. O surgimento do cinema permitiu observar o processo completo.</p>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=1200&h=675&fit=crop&q=80&auto=format" alt="Um rolo de filme de cinema">
+                        <figcaption>Da fotografia ao cinema: de capturar um instante a observar o processo completo.</figcaption>
+                    </figure>
                     <p>Algo semelhante pode estar acontecendo com a pesquisa do comportamento. As pesquisas de opinião continuam sendo extraordinariamente valiosas. As entrevistas continuam sendo indispensáveis. Mas ambas funcionam, em certo sentido, como fotografias: capturam momentos.</p>
                     <p>A inteligência artificial multimodal começa a oferecer algo diferente: não mais uma fotografia adicional, mas a possibilidade de observar a sequência completa. Ela não substitui as metodologias tradicionais. Ela as complementa.</p>
                     <h3>O risco do fascínio tecnológico</h3>
