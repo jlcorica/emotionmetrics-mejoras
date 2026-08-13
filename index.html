@@ -1586,11 +1586,11 @@
             <form class="contact-form" id="officeContactForm">
                 <div class="form-group">
                     <label data-es="Nombre completo" data-en="Full Name" data-pt="Nome completo">Full Name <span style="color:#ef4444">*</span></label>
-                    <input type="text" required placeholder="John Smith">
+                    <input type="text" id="officeFullname" required placeholder="John Smith">
                 </div>
                 <div class="form-group">
                     <label data-es="Empresa" data-en="Company" data-pt="Empresa">Company <span style="color:#ef4444">*</span></label>
-                    <input type="text" required placeholder="Acme Corp">
+                    <input type="text" id="officeCompany" required placeholder="Acme Corp">
                 </div>
                 <div class="form-group">
                     <label>Email <span style="color:#ef4444">*</span></label>
@@ -1598,7 +1598,7 @@
                 </div>
                 <div class="form-group">
                     <label data-es="Consulta" data-en="Inquiry" data-pt="Consulta">Inquiry <span style="color:#ef4444">*</span></label>
-                    <textarea required placeholder="How can we help you?"></textarea>
+                    <textarea id="officeMessage" required placeholder="How can we help you?"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" data-es="Enviar" data-en="Send" data-pt="Enviar">Send</button>
             </form>
@@ -2592,28 +2592,113 @@
             if (e.target === this) closeOfficeModal();
         });
 
+        // ── FORM SUBMISSION BACKEND (Google Apps Script) ────────────────
+        const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxZwzLMGIun_zwVgl4JgHuTnKosLOGo6KQsLJXTwOuZQvtFEDJ68O6rT27tzbnpdSavGQ/exec';
+        const FORM_SECRET = 'FD_HXrO3pD2K8ksXVCZzout-qSVfCv0K-B7l_tGKo34';
+
+        function postInquiry(payload) {
+            // text/plain avoids a CORS preflight; the Apps Script Web App
+            // still parses it as JSON on the server side (e.postData.contents).
+            return fetch(FORM_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            }).then(function(res) { return res.json(); });
+        }
+
         document.getElementById('officeContactForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const form = this;
+            const lang = currentLang.value;
             const targetEmail = document.getElementById('officeEmail').dataset.target;
-            alert('Message sent to ' + targetEmail + '!');
-            closeOfficeModal();
-            this.reset();
+            const button = form.querySelector('button[type="submit"]');
+            const originalLabel = button.textContent;
+            button.disabled = true;
+
+            const payload = {
+                secret: FORM_SECRET,
+                source: 'Office Modal',
+                fullname: document.getElementById('officeFullname').value,
+                company: document.getElementById('officeCompany').value,
+                email: document.getElementById('officeEmail').value,
+                message: document.getElementById('officeMessage').value,
+                targetEmail: targetEmail,
+                lang: lang
+            };
+
+            const errMsgs = {
+                en: 'Something went wrong sending your message. Please try again or email us directly at ' + targetEmail + '.',
+                es: 'Hubo un problema al enviar tu mensaje. Por favor, intentá de nuevo o escribinos directamente a ' + targetEmail + '.',
+                pt: 'Houve um problema ao enviar sua mensagem. Tente novamente ou escreva-nos diretamente para ' + targetEmail + '.'
+            };
+
+            postInquiry(payload).then(function(data) {
+                button.disabled = false;
+                button.textContent = originalLabel;
+                if (data && data.ok) {
+                    form.reset();
+                    closeOfficeModal();
+                } else {
+                    alert(errMsgs[lang] || errMsgs.en);
+                }
+            }).catch(function() {
+                button.disabled = false;
+                button.textContent = originalLabel;
+                alert(errMsgs[lang] || errMsgs.en);
+            });
         });
 
         // ── MAIN CONTACT FORM ──────────────────────────────────────────
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const form = this;
             const lang = currentLang.value;
             let targetEmail = _em.miami;
             if (lang === 'es') targetEmail = _em.bsas;
             if (lang === 'pt') targetEmail = _em.sao;
-            const msgs = {
+            const button = form.querySelector('button[type="submit"]');
+            const originalLabel = button.textContent;
+            button.disabled = true;
+
+            const payload = {
+                secret: FORM_SECRET,
+                source: 'Main Contact Form',
+                fullname: document.getElementById('fullname').value,
+                company: document.getElementById('company').value,
+                country: document.getElementById('country').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                website: document.getElementById('website').value,
+                message: document.getElementById('message').value,
+                targetEmail: targetEmail,
+                lang: lang
+            };
+
+            const okMsgs = {
                 en: 'Your inquiry has been sent to ' + targetEmail + '. We will be in touch shortly.',
                 es: 'Su consulta fue enviada a ' + targetEmail + '. Nos pondremos en contacto a la brevedad.',
                 pt: 'Sua consulta foi enviada para ' + targetEmail + '. Entraremos em contato em breve.'
             };
-            alert(msgs[lang] || msgs.en);
-            this.reset();
+            const errMsgs = {
+                en: 'Something went wrong sending your inquiry. Please try again or email us directly at ' + targetEmail + '.',
+                es: 'Hubo un problema al enviar tu consulta. Por favor, intentá de nuevo o escribinos directamente a ' + targetEmail + '.',
+                pt: 'Houve um problema ao enviar sua consulta. Tente novamente ou escreva-nos diretamente para ' + targetEmail + '.'
+            };
+
+            postInquiry(payload).then(function(data) {
+                button.disabled = false;
+                button.textContent = originalLabel;
+                if (data && data.ok) {
+                    alert(okMsgs[lang] || okMsgs.en);
+                    form.reset();
+                } else {
+                    alert(errMsgs[lang] || errMsgs.en);
+                }
+            }).catch(function() {
+                button.disabled = false;
+                button.textContent = originalLabel;
+                alert(errMsgs[lang] || errMsgs.en);
+            });
         });
 
         // ── EMAIL OBFUSCATION (anti-harvesting) ───────────────────────
