@@ -1510,7 +1510,7 @@
                                 <span data-es="Sitio web" data-en="Website" data-pt="Site">Website</span>
                                 <span class="optional" data-es="(opcional)" data-en="(optional)" data-pt="(opcional)">(optional)</span>
                             </label>
-                            <input type="url" id="website" name="website" placeholder="https://yourcompany.com">
+                            <input type="url" id="website" name="website" placeholder="https://yourcompany.com" value="https://">
                         </div>
                     </div>
                     <div class="form-group">
@@ -2668,7 +2668,10 @@
                 country: document.getElementById('country').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
-                website: document.getElementById('website').value,
+                website: (function() {
+                    const v = document.getElementById('website').value.trim();
+                    return (v === 'https://' || v === 'http://') ? '' : v;
+                })(),
                 message: document.getElementById('message').value,
                 targetEmail: targetEmail,
                 lang: lang
