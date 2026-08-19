@@ -217,6 +217,10 @@
             margin-top: 8px;
         }
 
+        .mobile-lang .lang-btn {
+            font-size: 2.46rem;
+        }
+
         /* ===== HERO SECTION ===== */
         .hero {
             margin-top: 210px;
@@ -556,32 +560,7 @@
             object-position: center;
         }
 
-        /* ===== INDUSTRIAS ===== */
-        .industries-tabs {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .industry-tab {
-            padding: 10px 24px;
-            border-radius: 8px;
-            border: 1px solid var(--border-dark);
-            background: transparent;
-            color: var(--text-gray);
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .industry-tab.active,
-        .industry-tab:hover {
-            border-color: var(--secondary);
-            color: var(--secondary);
-            background: rgba(0,217,255,0.08);
-        }
+        /* ===== INDUSTRIAS / SECTOR PÚBLICO ===== */
 
         .industry-panel {
             display: none;
@@ -1120,6 +1099,7 @@
                         <li><a href="#servicios" data-es="Servicios" data-en="Services" data-pt="Serviços">Services</a></li>
                         <li><a href="#metodologia" data-es="Metodología" data-en="Methodology" data-pt="Metodologia">Methodology</a></li>
                         <li><a href="#industrias" data-es="Industrias" data-en="Industries" data-pt="Indústrias">Industries</a></li>
+                        <li><a href="#sector-publico" data-es="Sector Público" data-en="Public Sector" data-pt="Setor Público">Public Sector</a></li>
                         <li><a href="#blog" data-es="Blog" data-en="Blog" data-pt="Blog">Blog</a></li>
                         <li><a href="#contacto" data-es="Contacto" data-en="Contact" data-pt="Contato">Contact</a></li>
                     </ul>
@@ -1142,6 +1122,7 @@
             <a href="#servicios" data-es="Servicios" data-en="Services" data-pt="Serviços">Services</a>
             <a href="#metodologia" data-es="Metodología" data-en="Methodology" data-pt="Metodologia">Methodology</a>
             <a href="#industrias" data-es="Industrias" data-en="Industries" data-pt="Indústrias">Industries</a>
+            <a href="#sector-publico" data-es="Sector Público" data-en="Public Sector" data-pt="Setor Público">Public Sector</a>
             <a href="#blog" data-es="Blog" data-en="Blog" data-pt="Blog">Blog</a>
             <a href="#contacto" data-es="Contacto" data-en="Contact" data-pt="Contato">Contact</a>
             <div class="mobile-lang">
@@ -1299,6 +1280,16 @@
                     </p>
                 </div>
 
+                <!-- 3.8 Digital Perception & Reputation Monitoring -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="ph-duotone ph-broadcast"></i></div>
+
+                    <h3 data-es="Monitoreo de Percepción e Imagen Digital" data-en="Digital Perception & Reputation Monitoring" data-pt="Monitoramento de Percepção e Reputação Digital">Digital Perception & Reputation Monitoring</h3>
+                    <p data-es="Saber qué se dice de ustedes no es lo mismo que saber qué sienten al respecto. Monitoreamos menciones, cobertura y reacción pública a los eventos clave de su organización en tiempo real, midiendo el impacto emocional detrás de las cifras — con alertas tempranas que alimentan directamente su plan de contingencia." data-en="Knowing what's being said about you isn't the same as knowing what people feel about it. We monitor mentions, coverage and public reaction to your organization's key events in real time, measuring the emotional impact behind the numbers — with early warnings that feed directly into your contingency response." data-pt="Saber o que dizem sobre vocês não é o mesmo que saber o que sentem a respeito. Monitoramos menções, cobertura e reação pública aos eventos-chave da sua organização em tempo real, medindo o impacto emocional por trás dos números — com alertas antecipados que alimentam diretamente seu plano de contingência.">
+                        Knowing what's being said about you isn't the same as knowing what people feel about it. We monitor mentions, coverage and public reaction to your organization's key events in real time, measuring the emotional impact behind the numbers — with early warnings that feed directly into your contingency response.
+                    </p>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1340,6 +1331,13 @@
                         Co-design → parallel execution → real-time monitoring → decision-oriented executive presentation. Results in hours, not weeks.
                     </p>
                 </div>
+                <div class="methodology-item">
+                    <i class="ph-duotone ph-siren step-icon"></i>
+                    <h3 data-es="Alerta Temprana y Respuesta" data-en="Early Warning & Response" data-pt="Alerta Antecipada e Resposta">Early Warning & Response</h3>
+                    <p data-es="Umbrales de alerta que activan automáticamente un brief ejecutivo de contingencia ante un cambio significativo en la percepción o el sentimiento hacia la organización, para que el equipo de comunicación actúe mientras todavía hay margen de maniobra." data-en="Alert thresholds that automatically trigger an executive contingency brief when perception or sentiment toward the organization shifts significantly, so the communications team can act while there's still room to maneuver." data-pt="Limiares de alerta que acionam automaticamente um briefing executivo de contingência diante de uma mudança significativa na percepção ou no sentimento em relação à organização, para que a equipe de comunicação possa agir enquanto ainda há margem de manobra.">
+                        Alert thresholds that automatically trigger an executive contingency brief when perception or sentiment toward the organization shifts significantly, so the communications team can act while there's still room to maneuver.
+                    </p>
+                </div>
             </div>
             <div class="methodology-diagram">
                 <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/FTkMXvtusKeblNhG.png" alt="Abstract AI Agent Swarm Visualization" style="object-fit:contain; object-position:center;">
@@ -1352,17 +1350,10 @@
         <div class="container">
             <div class="section-divider"></div>
             <h2 class="section-title" data-es="Industrias" data-en="Industries" data-pt="Indústrias">Industries</h2>
-            <p class="section-subtitle" data-es="Inteligencia emocional aplicada donde más importa. Tenemos experiencia trabajando con organizaciones del sector privado, instituciones públicas y organismos en América Latina y mercados internacionales." data-en="Emotional intelligence applied where it matters most. We have experience working with private sector organizations, public institutions and agencies in Latin America and international markets." data-pt="Inteligência emocional aplicada onde mais importa. Temos experiência trabalhando com organizações do setor privado, instituições públicas e organismos na América Latina e mercados internacionais.">
-                Emotional intelligence applied where it matters most. We have experience working with private sector organizations, public institutions and agencies in Latin America and international markets.
+            <p class="section-subtitle" data-es="Inteligencia emocional aplicada donde más importa. Tenemos experiencia trabajando con empresas y marcas en América Latina y mercados internacionales." data-en="Emotional intelligence applied where it matters most. We have experience working with companies and brands across Latin America and international markets." data-pt="Inteligência emocional aplicada onde mais importa. Temos experiência trabalhando com empresas e marcas na América Latina e mercados internacionais.">
+                Emotional intelligence applied where it matters most. We have experience working with companies and brands across Latin America and international markets.
             </p>
 
-            <!-- Tabs de industrias -->
-            <div class="industries-tabs">
-                <button class="industry-tab active" onclick="showIndustry('companies', this)" data-es="Empresas y Marcas" data-en="Companies & Brands" data-pt="Empresas e Marcas">Companies & Brands</button>
-                <button class="industry-tab" onclick="showIndustry('public', this)" data-es="Sector Público y Organismos" data-en="Public Sector & Agencies" data-pt="Setor Público e Organismos">Public Sector & Agencies</button>
-            </div>
-
-            <!-- Panel: Empresas y Marcas -->
             <div class="industry-panel active" id="panel-companies">
                 <div class="industry-text">
                     <h3 data-es="Empresas y Marcas" data-en="Companies & Brands" data-pt="Empresas e Marcas">Companies & Brands</h3>
@@ -1375,16 +1366,29 @@
                 </div>
             </div>
 
-            <!-- Panel: Sector Público -->
-            <div class="industry-panel" id="panel-public">
+        </div>
+    </section>
+
+    <!-- ===== SECTOR PÚBLICO ===== -->
+    <section id="sector-publico">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title" data-es="Sector Público" data-en="Public Sector" data-pt="Setor Público">Public Sector</h2>
+            <p class="section-subtitle" data-es="Percepción ciudadana e impacto emocional de la gestión pública, medidos con el mismo rigor que cualquier otro indicador de gobierno." data-en="Citizen perception and the emotional impact of public management, measured with the same rigor as any other government indicator." data-pt="Percepção cidadã e impacto emocional da gestão pública, medidos com o mesmo rigor que qualquer outro indicador de governo.">
+                Citizen perception and the emotional impact of public management, measured with the same rigor as any other government indicator.
+            </p>
+
+            <div class="industry-panel active" id="panel-public">
                 <div class="industry-text">
-                    <h3 data-es="Sector Público y Organismos" data-en="Public Sector & Agencies" data-pt="Setor Público e Organismos">Public Sector & Agencies</h3>
                     <p data-es="Para organizaciones del sector público y organismos institucionales, EmotionMetrics provee inteligencia profunda sobre percepciones ciudadanas, expectativas de stakeholders e impacto emocional de políticas públicas y comunicaciones institucionales. En el sector público, donde las decisiones afectan a grandes poblaciones y el margen de error es especialmente costoso, la inteligencia emocional no es un lujo: es un insumo estratégico crítico." data-en="For public sector organizations and institutional agencies, EmotionMetrics provides deep intelligence on citizen perceptions, stakeholder expectations and emotional impact of public policies and institutional communications. In the public sector, where decisions affect large populations and the margin of error is especially costly, emotional intelligence is not a luxury: it is a critical strategic input." data-pt="Para organizações do setor público e organismos institucionais, a EmotionMetrics fornece inteligência profunda sobre percepções cidadãs, expectativas de stakeholders e impacto emocional de políticas públicas e comunicações institucionais. No setor público, onde as decisões afetam grandes populações e a margem de erro é especialmente custosa, a inteligência emocional não é um luxo: é um insumo estratégico crítico.">
                         In the public sector, decisions affect large populations — and the cost of misreading them is high. EmotionMetrics provides governments, agencies and multilateral organizations with deep intelligence on citizen perceptions and the emotional impact of public policies, enabling communications and services that genuinely connect with the people they serve.
                     </p>
+                    <p data-es="No lo planteamos como un indicador único, sino como un complemento a los indicadores tradicionales de gestión pública —ejecución presupuestaria, cobertura, resultados—, mostrando la dimensión de la experiencia ciudadana que esos indicadores no alcanzan a capturar. Esto incluye monitoreo permanente de menciones y cobertura mediática, con detección temprana de riesgo reputacional ante eventos institucionales sensibles y comunicaciones que puedan afectar la imagen pública del organismo." data-en="We don't position this as a sole indicator, but as a complement to traditional public management metrics — budget execution, coverage, outcomes — capturing the dimension of citizen experience those metrics can't reach on their own. This includes continuous monitoring of mentions and media coverage, with early detection of reputational risk around sensitive institutional events and communications that could affect the agency's public image." data-pt="Não apresentamos isso como um indicador único, mas como um complemento aos indicadores tradicionais de gestão pública — execução orçamentária, cobertura, resultados —, mostrando a dimensão da experiência cidadã que esses indicadores não conseguem captar sozinhos. Isso inclui monitoramento permanente de menções e cobertura midiática, com detecção antecipada de risco reputacional diante de eventos institucionais sensíveis e comunicações que possam afetar a imagem pública do organismo.">
+                        We don't position this as a sole indicator, but as a complement to traditional public management metrics — budget execution, coverage, outcomes — capturing the dimension of citizen experience those metrics can't reach on their own. This includes continuous monitoring of mentions and media coverage, with early detection of reputational risk around sensitive institutional events and communications that could affect the agency's public image.
+                    </p>
                 </div>
                 <div class="industries-image">
-                    <img src="https://images.unsplash.com/photo-1742630394132-cbd951f7d924?w=1200&h=800&fit=crop&q=80&auto=format" alt="Public Sector">
+                    <img src="https://images.unsplash.com/photo-1565832077366-f22d1a0dd598?w=1200&h=800&fit=crop&q=80&auto=format" alt="Edificio de gobierno, sector público">
                 </div>
             </div>
 
@@ -1663,13 +1667,6 @@
         });
 
         // ── INDUSTRIES TABS ────────────────────────────────────────────
-        function showIndustry(id, el) {
-            document.querySelectorAll('.industry-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.industry-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('panel-' + id).classList.add('active');
-            if (el) el.classList.add('active');
-        }
-
         // ── BLOG MODAL ─────────────────────────────────────────────────
         const blogArticles = {
             1: {
