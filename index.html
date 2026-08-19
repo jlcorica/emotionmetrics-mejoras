@@ -8,12 +8,14 @@
     <title>EmotionMetrics | Emotion data for better decisions</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         :root {
             --primary-dark: #0F172A;
             --primary-light: #1E293B;
             --secondary: #00D9FF;
             --accent: #7C3AED;
+            --icon-accent: #E3AB61;
             --bg-dark: #0A0E27;
             --text-light: #F8FAFC;
             --text-gray: #CBD5E1;
@@ -382,7 +384,7 @@
 
         .location-item i {
             font-size: 1.5rem;
-            color: var(--secondary);
+            color: var(--icon-accent);
             margin-bottom: 10px;
             display: block;
         }
@@ -453,7 +455,7 @@
 
         .service-icon i {
             font-size: 1.6rem;
-            color: var(--secondary);
+            color: var(--icon-accent);
         }
 
         .service-card h3 {
@@ -506,7 +508,7 @@
 
         .methodology-item .step-icon {
             font-size: 2.2rem;
-            color: var(--secondary);
+            color: var(--icon-accent);
             margin-bottom: 14px;
             display: block;
             opacity: 0.85;
@@ -685,6 +687,7 @@
         }
 
         .blog-read-more:hover { gap: 14px; }
+        .blog-read-more i { color: var(--icon-accent); }
 
         /* ===== MODAL DE ARTÍCULO DE BLOG ===== */
         .blog-modal-overlay {
@@ -772,6 +775,7 @@
         }
 
         .blog-modal-back:hover { gap: 14px; }
+        .blog-modal-back i { color: var(--icon-accent); }
 
         .blog-modal-body figure {
             margin: 28px 0;
@@ -899,7 +903,7 @@
         }
 
         .contact-email-item i {
-            color: var(--secondary);
+            color: var(--icon-accent);
             margin-top: 3px;
             flex-shrink: 0;
         }
@@ -1178,17 +1182,17 @@
                     <div class="locations">
                         <!-- Cada ícono abre un formulario de contacto para esa sede -->
                         <a href="javascript:void(0)" class="location-item" onclick="openOfficeModal('miami')" title="Contact Miami HQ">
-                            <i class="fas fa-city"></i>
+                            <i class="ph-duotone ph-buildings"></i>
                             <h4>Miami, USA</h4>
                             <p data-es="Sede Principal" data-en="Headquarters" data-pt="Sede Principal">Headquarters</p>
                         </a>
                         <a href="javascript:void(0)" class="location-item" onclick="openOfficeModal('bsas')" title="Contact Buenos Aires Office">
-                            <i class="fas fa-building"></i>
+                            <i class="ph-duotone ph-building-office"></i>
                             <h4>Buenos Aires, AR</h4>
                             <p data-es="Oficina Regional" data-en="Regional Office" data-pt="Escritório Regional">Regional Office</p>
                         </a>
                         <a href="javascript:void(0)" class="location-item" onclick="openOfficeModal('sao')" title="Contact São Paulo Office">
-                            <i class="fas fa-landmark"></i>
+                            <i class="ph-duotone ph-bank"></i>
                             <h4>São Paulo, BR</h4>
                             <p data-es="Oficina Regional" data-en="Regional Office" data-pt="Escritório Regional">Regional Office</p>
                         </a>
@@ -1213,7 +1217,7 @@
 
                 <!-- 3.1 Emotional Listening -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-ear-listen"></i></div>
+                    <div class="service-icon"><i class="ph-duotone ph-ear"></i></div>
 
                     <h3 data-es="Escucha Emocional con IA" data-en="Emotional Listening with AI" data-pt="Escuta Emocional com IA">Emotional Listening with AI</h3>
                     <p data-es="Detecta en tiempo real la emoción detrás de cada respuesta: la confianza, la duda, el entusiasmo genuino, la resistencia no expresada. Llegamos donde los demás no llegan porque escuchamos de una manera que los demás no pueden." data-en="Detects in real time the emotion behind every response: confidence, doubt, genuine enthusiasm, unexpressed resistance. We reach where others cannot because we listen in a way others cannot." data-pt="Detecta em tempo real a emoção por trás de cada resposta: confiança, dúvida, entusiasmo genuíno, resistência não expressa. Chegamos onde os outros não chegam porque ouvimos de uma forma que os outros não conseguem.">
@@ -1223,7 +1227,7 @@
 
                 <!-- 3.2 Multimodal Analysis -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+                    <div class="service-icon"><i class="ph-duotone ph-brain"></i></div>
 
                     <h3 data-es="Análisis Emocional Multimodal" data-en="Multimodal Emotional Analysis" data-pt="Análise Emocional Multimodal">Multimodal Emotional Analysis</h3>
                     <p data-es="Analiza expresiones faciales, tono vocal, lenguaje corporal y contenido verbal de forma coordinada, cruzando señales para detectar incoherencias entre lo que se dice y lo que se siente." data-en="Analyzes facial expressions, vocal tone, body language and verbal content in a coordinated way, crossing signals to detect inconsistencies between what is said and what is felt." data-pt="Analisa expressões faciais, tom vocal, linguagem corporal e conteúdo verbal de forma coordenada, cruzando sinais para detectar inconsistências entre o que é dito e o que é sentido.">
@@ -1233,7 +1237,7 @@
 
                 <!-- 3.3 MVP Testing -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="service-icon"><i class="ph-duotone ph-rocket-launch"></i></div>
 
                     <h3 data-es="Testeo de MVP y Ciclos Ágiles" data-en="MVP Testing & Agile Cycles" data-pt="Teste de MVP e Ciclos Ágeis">MVP Testing & Agile Cycles</h3>
                     <p data-es="Feedback emocional en horas, no en semanas. Integra evidencia emocional en cada sprint de desarrollo ágil: qué genera atracción, qué genera duda, qué genera abandono y por qué." data-en="Emotional feedback in hours, not weeks. Integrate emotional evidence in every agile development sprint: what generates attraction, doubt, abandonment and why." data-pt="Feedback emocional em horas, não em semanas. Integre evidência emocional em cada sprint de desenvolvimento ágil: o que gera atração, dúvida, abandono e por quê.">
@@ -1243,7 +1247,7 @@
 
                 <!-- 3.4 AI for Agile -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="service-icon"><i class="ph-duotone ph-lightning"></i></div>
 
                     <h3 data-es="IA para Metodologías Ágiles" data-en="AI for Agile Methodologies" data-pt="IA para Metodologias Ágeis">AI for Agile Methodologies</h3>
                     <p data-es="Aprenda más rápido. Decida con más precisión. Escale más lejos. Nuestro enfoque AI-first convierte las emociones de sus usuarios en datos precisos en el tiempo de un sprint, acelerando el ciclo de aprendizaje organizacional." data-en="Learn faster. Decide with more precision. Scale further. Our AI-first approach converts your users' emotions into precise data in the time of a sprint, accelerating the organizational learning cycle." data-pt="Aprenda mais rápido. Decida com mais precisão. Escale mais longe. Nossa abordagem AI-first converte as emoções de seus usuários em dados precisos no tempo de um sprint, acelerando o ciclo de aprendizado organizacional.">
@@ -1253,7 +1257,7 @@
 
                 <!-- 3.5 Continuous Intelligence -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="service-icon"><i class="ph-duotone ph-chart-line-up"></i></div>
 
                     <h3 data-es="Inteligencia Continua" data-en="Continuous Intelligence" data-pt="Inteligência Contínua">Continuous Intelligence</h3>
                     <p data-es="De los estudios aislados a la escucha permanente. Un sistema continuo de inteligencia que monitorea percepciones, emociones y expectativas de sus stakeholders en tiempo real, anticipando cambios antes de que se vuelvan crisis." data-en="From isolated studies to permanent listening. A continuous intelligence system that monitors perceptions, emotions and expectations of your stakeholders in real time, anticipating changes before they become crises." data-pt="De estudos isolados à escuta permanente. Um sistema contínuo de inteligência que monitora percepções, emoções e expectativas de seus stakeholders em tempo real, antecipando mudanças antes que se tornem crises.">
@@ -1263,7 +1267,7 @@
 
                 <!-- 3.6 Educational Research -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="service-icon"><i class="ph-duotone ph-graduation-cap"></i></div>
 
                     <h3 data-es="Investigación Educativa" data-en="Educational Research" data-pt="Pesquisa Educacional">Educational Research</h3>
                     <p data-es="Lo que los estudiantes sienten sobre su institución, su docente y su experiencia de aprendizaje. Inteligencia emocional para la gestión institucional y áulica basada en evidencia real." data-en="What students feel about their institution, their teacher and their learning experience. Emotional intelligence for institutional and classroom management based on real evidence." data-pt="O que os alunos sentem sobre sua instituição, seu professor e sua experiência de aprendizado. Inteligência emocional para gestão institucional e de sala de aula baseada em evidências reais.">
@@ -1273,7 +1277,7 @@
 
                 <!-- 3.7 Opinion Polling -->
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-poll-h"></i></div>
+                    <div class="service-icon"><i class="ph-duotone ph-chart-bar"></i></div>
 
                     <h3 data-es="Sondeo de Opinión y Posicionamiento" data-en="Opinion Polling & Positioning" data-pt="Sondagem de Opinião e Posicionamento">Opinion Polling & Positioning</h3>
                     <p data-es="Percepción real, no respuestas declaradas. Análisis a gran escala integrando entrevistas interactivas con análisis profundo de lenguaje natural, tono de voz y patrones emocionales." data-en="Real perception, not declared responses. Large-scale analysis integrating interactive interviews with deep natural language analysis, voice tone and emotional patterns." data-pt="Percepção real, não respostas declaradas. Análise em grande escala integrando entrevistas interativas com análise profunda de linguagem natural, tom de voz e padrões emocionais.">
@@ -1295,28 +1299,28 @@
             </p>
             <div class="methodology-grid">
                 <div class="methodology-item">
-                    <i class="fas fa-microchip step-icon"></i>
+                    <i class="ph-duotone ph-cpu step-icon"></i>
                     <h3 data-es="Enfoque AI-First" data-en="AI-First Approach" data-pt="Abordagem AI-First">AI-First Approach</h3>
                     <p data-es="La IA es la infraestructura sobre la que se construye todo el trabajo. Análisis en tiempo real con una profundidad que supera cualquier metodología manual." data-en="AI is the infrastructure on which all work is built. Real-time analysis with a depth that surpasses any manual methodology." data-pt="A IA é a infraestrutura sobre a qual todo o trabalho é construído. Análise em tempo real com uma profundidade que supera qualquer metodologia manual.">
                         AI is the infrastructure on which all work is built. Real-time analysis with a depth that surpasses any manual methodology.
                     </p>
                 </div>
                 <div class="methodology-item">
-                    <i class="fas fa-network-wired step-icon"></i>
+                    <i class="ph-duotone ph-tree-structure step-icon"></i>
                     <h3 data-es="Enjambre de Agentes IA" data-en="AI Agent Swarm" data-pt="Enxame de Agentes IA">AI Agent Swarm</h3>
                     <p data-es="Múltiples agentes especializados trabajan en paralelo: uno conduce la entrevista, otros analizan simultáneamente expresiones, voz y lenguaje. Comprensión multidimensional en tiempo real." data-en="Multiple specialized agents work in parallel: one conducts the interview, others simultaneously analyze expressions, voice and language. Multidimensional understanding in real time." data-pt="Múltiplos agentes especializados trabalham em paralelo: um conduz a entrevista, outros analisam simultaneamente expressões, voz e linguagem. Compreensão multidimensional em tempo real.">
                         Multiple specialized agents work in parallel: one conducts the interview, others simultaneously analyze expressions, voice and language. Multidimensional understanding in real time.
                     </p>
                 </div>
                 <div class="methodology-item">
-                    <i class="fas fa-layer-group step-icon"></i>
+                    <i class="ph-duotone ph-stack step-icon"></i>
                     <h3 data-es="Análisis Emocional Multimodal" data-en="Multimodal Emotional Analysis" data-pt="Análise Emocional Multimodal">Multimodal Emotional Analysis</h3>
                     <p data-es="Integramos expresiones faciales, tono vocal, lenguaje corporal y contenido verbal de forma simultánea para construir una lectura emocional de alta fidelidad." data-en="We integrate facial expressions, vocal tone, body language and verbal content simultaneously to build a high-fidelity emotional reading." data-pt="Integramos expressões faciais, tom vocal, linguagem corporal e conteúdo verbal simultaneamente para construir uma leitura emocional de alta fidelidade.">
                         We integrate facial expressions, vocal tone, body language and verbal content simultaneously to build a high-fidelity emotional reading.
                     </p>
                 </div>
                 <div class="methodology-item">
-                    <i class="fas fa-diagram-project step-icon"></i>
+                    <i class="ph-duotone ph-flow-arrow step-icon"></i>
                     <h3 data-es="Flujo de Proyecto" data-en="Project Flow" data-pt="Fluxo de Projeto">Project Flow</h3>
                     <p data-es="Co-diseño → ejecución en paralelo → monitoreo en tiempo real → presentación ejecutiva orientada a la decisión. Resultados en horas, no en semanas." data-en="Co-design → parallel execution → real-time monitoring → decision-oriented executive presentation. Results in hours, not weeks." data-pt="Co-design → execução em paralelo → monitoramento em tempo real → apresentação executiva orientada à decisão. Resultados em horas, não em semanas.">
                         Co-design → parallel execution → real-time monitoring → decision-oriented executive presentation. Results in hours, not weeks.
@@ -1395,7 +1399,7 @@
                             Decades of neuroscience confirm what business practice often ignores: people make decisions predominantly emotionally and rationalize them afterwards. Conventional surveys capture that rationalization, not the original emotion.
                         </p>
                         <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogModal(1)">
-                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="fas fa-arrow-right"></i>
+                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="ph-duotone ph-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -1412,7 +1416,7 @@
                             What if Agile's real advantage was never speed? Organizations don't win by developing faster, but by learning before their competitors do. Discover how emotional feedback is redefining the speed of organizational learning.
                         </p>
                         <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogModal(2)">
-                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="fas fa-arrow-right"></i>
+                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="ph-duotone ph-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -1429,7 +1433,7 @@
                             Two users can do exactly the same thing —the same journey, the same pause, the same click— and be living completely different experiences. If metrics can't tell them apart, how much do we really know about our users' experience? Multimodal emotional analysis is beginning to open a window onto what happens around the click.
                         </p>
                         <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogModal(3)">
-                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="fas fa-arrow-right"></i>
+                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="ph-duotone ph-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -1446,7 +1450,7 @@
                             When a student drops out, the data finally becomes unambiguous. But by then we can only reconstruct what happened. The uncomfortable question is a different one: what signals did they give off during the previous weeks or months that our systems failed to recognize? Emotional AI and multimodal analysis make it possible to look for changes that used to be scattered across language, interaction and experience — not to replace educational analytics, but to attempt something harder: detecting early symptoms while there's still time to act.
                         </p>
                         <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogModal(4)">
-                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="fas fa-arrow-right"></i>
+                            <span data-es="Leer artículo" data-en="Read article" data-pt="Ler artigo">Read article</span> <i class="ph-duotone ph-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -1526,21 +1530,21 @@
                         A specialist will contact you shortly to explore how EmotionMetrics capabilities can be applied to your specific challenges.
                     </p>
                     <div class="contact-email-item">
-                        <i class="fas fa-city"></i>
+                        <i class="ph-duotone ph-buildings"></i>
                         <div>
                             <span>Miami — Headquarters (EN)</span>
                             <a id="em-miami" style="color:var(--secondary);text-decoration:none;"></a>
                         </div>
                     </div>
                     <div class="contact-email-item">
-                        <i class="fas fa-building"></i>
+                        <i class="ph-duotone ph-building-office"></i>
                         <div>
                             <span>Buenos Aires — Regional Office (ES)</span>
                             <a id="em-bsas" style="color:var(--secondary);text-decoration:none;"></a>
                         </div>
                     </div>
                     <div class="contact-email-item">
-                        <i class="fas fa-landmark"></i>
+                        <i class="ph-duotone ph-bank"></i>
                         <div>
                             <span>São Paulo — Regional Office (PT)</span>
                             <a id="em-sao" style="color:var(--secondary);text-decoration:none;"></a>
@@ -1572,7 +1576,7 @@
             <h2 id="blogModalTitle"></h2>
             <div class="blog-modal-body" id="blogModalBody"></div>
             <button class="blog-modal-back" onclick="closeBlogModal()">
-                <i class="fas fa-arrow-left"></i> <span data-es="Volver al Blog" data-en="Back to Blog" data-pt="Voltar ao Blog">Back to Blog</span>
+                <i class="ph-duotone ph-arrow-left"></i> <span data-es="Volver al Blog" data-en="Back to Blog" data-pt="Voltar ao Blog">Back to Blog</span>
             </button>
         </div>
     </div>
