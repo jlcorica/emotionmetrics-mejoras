@@ -1055,7 +1055,7 @@
             .form-row { grid-template-columns: 1fr; }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .nav-row { display: none; }
             .hamburger { display: flex; }
             .logo-banner { position: relative; padding-right: 60px; }
@@ -1076,6 +1076,15 @@
             .locations { flex-direction: column; }
             .hero-cta { flex-direction: column; }
             .hero-cta .btn { text-align: center; }
+        }
+
+        /* Viewport bajo (celular en horizontal, ventana chica) — el header es
+           fixed, así que su altura resta pantalla visible todo el tiempo, no
+           solo al cargar. Se prioriza altura disponible por sobre el ancho. */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .logo-banner { padding: 6px 0 4px; }
+            .logo-banner img { height: 56px; }
+            .hero { margin-top: 70px; }
         }
     </style>
 </head>
