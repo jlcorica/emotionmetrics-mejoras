@@ -730,6 +730,76 @@
             display: block;
         }
 
+        .blog-modal-toprow {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .blog-modal-toprow .blog-modal-tag { margin-bottom: 16px; }
+
+        .blog-share { position: relative; flex-shrink: 0; }
+
+        .blog-share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0,217,255,0.08);
+            border: 1px solid var(--border-dark);
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 7px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .blog-share-btn:hover { border-color: var(--secondary); color: var(--secondary); }
+        .blog-share-btn i { color: var(--icon-accent); font-size: 1rem; }
+
+        .blog-share-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--primary-light);
+            border: 1px solid var(--border-dark);
+            border-radius: 10px;
+            padding: 8px;
+            min-width: 180px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        .blog-share-menu.open { display: flex; flex-direction: column; gap: 2px; }
+
+        .blog-share-menu a, .blog-share-menu button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 10px;
+            border-radius: 6px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: inherit;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .blog-share-menu a:hover, .blog-share-menu button:hover {
+            background: rgba(255,255,255,0.06);
+            color: var(--secondary);
+        }
+
+        .blog-share-menu i { color: var(--icon-accent); font-size: 1.05rem; }
+
         .blog-modal h2 {
             font-size: 1.8rem;
             font-weight: 700;
@@ -1619,7 +1689,22 @@
     <div class="blog-modal-overlay" id="blogModal">
         <div class="blog-modal">
             <button class="blog-modal-close" onclick="closeBlogModal()">&times;</button>
-            <span class="blog-modal-tag" id="blogModalTag">EmotionMetrics Blog</span>
+            <div class="blog-modal-toprow">
+                <span class="blog-modal-tag" id="blogModalTag">EmotionMetrics Blog</span>
+                <div class="blog-share" id="blogShare">
+                    <button class="blog-share-btn" id="blogShareBtn" type="button" onclick="handleShareClick(event)">
+                        <i class="ph-duotone ph-share-network"></i>
+                        <span data-es="Compartir" data-en="Share" data-pt="Compartilhar">Share</span>
+                    </button>
+                    <div class="blog-share-menu" id="blogShareMenu">
+                        <a id="shareWhatsapp" href="#" target="_blank" rel="noopener"><i class="ph-duotone ph-whatsapp-logo"></i> WhatsApp</a>
+                        <a id="shareTelegram" href="#" target="_blank" rel="noopener"><i class="ph-duotone ph-telegram-logo"></i> Telegram</a>
+                        <a id="shareFacebook" href="#" target="_blank" rel="noopener"><i class="ph-duotone ph-facebook-logo"></i> Facebook</a>
+                        <a id="shareEmail" href="#"><i class="ph-duotone ph-envelope-simple"></i> <span data-es="Correo" data-en="Email" data-pt="E-mail">Email</span></a>
+                        <button id="shareCopy" type="button" onclick="copyBlogLink()"><i class="ph-duotone ph-link-simple"></i> <span data-es="Copiar enlace" data-en="Copy link" data-pt="Copiar link">Copy link</span></button>
+                    </div>
+                </div>
+            </div>
             <h2 id="blogModalTitle"></h2>
             <div class="blog-modal-body" id="blogModalBody"></div>
             <button class="blog-modal-back" onclick="closeBlogModal()">
@@ -2724,7 +2809,11 @@
             }
         };
 
-        function openBlogModal(num) {
+        let currentBlogNum = null;
+
+        function openBlogModal(num, updateHash) {
+            if (updateHash === undefined) updateHash = true;
+            currentBlogNum = num;
             const lang = currentLang.value;
             let article;
             if (lang === 'es' && blogArticlesEs[num]) {
@@ -2734,20 +2823,106 @@
             } else {
                 article = blogArticles[num];
             }
+            if (!article) return;
             document.getElementById('blogModalTag').textContent = article.tag;
             document.getElementById('blogModalTitle').textContent = article.title;
             document.getElementById('blogModalBody').innerHTML = article.body;
             document.getElementById('blogModal').classList.add('open');
             document.body.style.overflow = 'hidden';
+            closeShareMenu();
+            updateShareLinks(num, article.title);
+            if (updateHash) {
+                history.pushState({ blog: num }, '', '#blog-' + num);
+            }
         }
 
-        function closeBlogModal() {
+        function closeBlogModal(updateHash) {
+            if (updateHash === undefined) updateHash = true;
             document.getElementById('blogModal').classList.remove('open');
             document.body.style.overflow = '';
+            closeShareMenu();
+            if (updateHash && /^#blog-\d+$/.test(window.location.hash)) {
+                history.pushState({}, '', window.location.pathname + window.location.search);
+            }
         }
 
         document.getElementById('blogModal').addEventListener('click', function(e) {
             if (e.target === this) closeBlogModal();
+        });
+
+        // ── COMPARTIR ARTÍCULO ─────────────────────────────────────────
+        function blogShareUrl(num) {
+            return window.location.origin + window.location.pathname + '#blog-' + num;
+        }
+
+        function updateShareLinks(num, title) {
+            const url = blogShareUrl(num);
+            document.getElementById('shareWhatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(title + ' ' + url);
+            document.getElementById('shareTelegram').href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(title);
+            document.getElementById('shareFacebook').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+            document.getElementById('shareEmail').href = 'mailto:?subject=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(url);
+        }
+
+        function handleShareClick(e) {
+            e.stopPropagation();
+            if (navigator.share) {
+                const url = blogShareUrl(currentBlogNum);
+                const title = document.getElementById('blogModalTitle').textContent;
+                navigator.share({ title: title, url: url }).catch(function () {});
+            } else {
+                toggleShareMenu();
+            }
+        }
+
+        function toggleShareMenu() {
+            document.getElementById('blogShareMenu').classList.toggle('open');
+        }
+
+        function closeShareMenu() {
+            const menu = document.getElementById('blogShareMenu');
+            if (menu) menu.classList.remove('open');
+        }
+
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('blogShareMenu');
+            const btn = document.getElementById('blogShareBtn');
+            if (menu && menu.classList.contains('open') && !menu.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+                closeShareMenu();
+            }
+        });
+
+        function copyBlogLink() {
+            const url = blogShareUrl(currentBlogNum);
+            const btn = document.getElementById('shareCopy');
+            const original = btn.innerHTML;
+            navigator.clipboard.writeText(url).then(function () {
+                const lang = currentLang.value;
+                const label = lang === 'es' ? 'Copiado' : (lang === 'pt' ? 'Copiado' : 'Copied');
+                btn.innerHTML = '<i class="ph-duotone ph-check"></i> ' + label;
+                setTimeout(function () { btn.innerHTML = original; closeShareMenu(); }, 1500);
+            }).catch(function () {});
+        }
+
+        // Deep-link: abre el artículo directo si la URL trae #blog-N
+        (function initBlogFromHash() {
+            const m = window.location.hash.match(/^#blog-(\d+)$/);
+            if (!m) return;
+            const num = parseInt(m[1], 10);
+            if (!blogArticles[num] && !blogArticlesEs[num] && !blogArticlesPt[num]) return;
+            setTimeout(function () {
+                const section = document.getElementById('blog');
+                if (section) section.scrollIntoView({ block: 'start' });
+                openBlogModal(num, false);
+            }, 0);
+        })();
+
+        window.addEventListener('popstate', function () {
+            const m = window.location.hash.match(/^#blog-(\d+)$/);
+            if (m) {
+                openBlogModal(parseInt(m[1], 10), false);
+            } else {
+                closeBlogModal(false);
+            }
         });
 
         // ── OFFICE MODAL ───────────────────────────────────────────────
