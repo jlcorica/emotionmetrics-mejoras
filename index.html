@@ -870,6 +870,51 @@
             line-height: 1.5;
         }
 
+        .blog-readmore-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 28px 0 6px;
+            padding-top: 26px;
+            border-top: 1px solid var(--border-dark);
+            flex-wrap: wrap;
+        }
+
+        .blog-readmore-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--secondary);
+            color: var(--primary-dark);
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 11px 22px;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .blog-readmore-btn:hover { opacity: 0.85; }
+        .blog-readmore-btn i { font-size: 1rem; }
+
+        .blog-earlyreturn-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .blog-earlyreturn-btn:hover { color: var(--secondary); }
+        .blog-earlyreturn-btn i { color: var(--icon-accent); }
+
         .blog-card-image {
             width: 100%;
             aspect-ratio: 5 / 2;
@@ -1699,7 +1744,7 @@
     <!-- ===== MODALES DE ARTÍCULOS DE BLOG ===== -->
     <div class="blog-modal-overlay" id="blogModal">
         <div class="blog-modal">
-            <button class="blog-modal-close" onclick="closeBlogModal()">&times;</button>
+            <button class="blog-modal-close" onclick="trackBlogEngagement('closed_other', 'close_x'); closeBlogModal();">&times;</button>
             <div class="blog-modal-toprow">
                 <span class="blog-modal-tag" id="blogModalTag">EmotionMetrics Blog</span>
                 <div class="blog-share" id="blogShareTop">
@@ -1718,8 +1763,8 @@
             </div>
             <h2 id="blogModalTitle"></h2>
             <div class="blog-modal-body" id="blogModalBody"></div>
-            <div class="blog-modal-bottom-row">
-                <button class="blog-modal-back" onclick="closeBlogModal()">
+            <div class="blog-modal-bottom-row" id="blogModalBottomRow">
+                <button class="blog-modal-back" onclick="trackBlogEngagement('completed_return'); closeBlogModal();">
                     <i class="ph-duotone ph-arrow-left"></i> <span data-es="Volver al Blog" data-en="Back to Blog" data-pt="Voltar ao Blog">Back to Blog</span>
                 </button>
                 <div class="blog-share blog-share--bottom" id="blogShareBottom">
@@ -2841,6 +2886,51 @@
         let currentBlogNum = null;
         let currentBlogLang = null;
 
+        // ── LECTURA POR TRAMOS ("Leer más" / "Volver") ──────────────────
+        // Corta el cuerpo del artículo en el primer tercio (por texto acumulado,
+        // en límites de bloque: <p>/<h3>/<figure>) para poder medir quién se
+        // interesa lo suficiente como para seguir leyendo.
+        const READMORE_LABELS = {
+            es: { more: 'Leer más', back: 'Volver' },
+            en: { more: 'Read more', back: 'Back' },
+            pt: { more: 'Ler mais', back: 'Voltar' }
+        };
+
+        function splitArticleBody(html) {
+            const container = document.createElement('div');
+            container.innerHTML = html;
+            const nodes = Array.from(container.childNodes).filter(function (n) { return n.nodeType === 1; });
+            if (nodes.length < 2) return { teaser: html, rest: '', hasSplit: false };
+
+            const totalLen = container.textContent.length;
+            const target = totalLen / 3;
+            let acc = 0;
+            let splitIndex = 1;
+            for (let i = 0; i < nodes.length; i++) {
+                acc += nodes[i].textContent.length;
+                if (acc >= target) { splitIndex = i + 1; break; }
+            }
+            if (splitIndex >= nodes.length) splitIndex = Math.max(1, nodes.length - 1);
+
+            const teaserDiv = document.createElement('div');
+            nodes.slice(0, splitIndex).forEach(function (n) { teaserDiv.appendChild(n.cloneNode(true)); });
+            const restDiv = document.createElement('div');
+            nodes.slice(splitIndex).forEach(function (n) { restDiv.appendChild(n.cloneNode(true)); });
+
+            if (!restDiv.childNodes.length) return { teaser: html, rest: '', hasSplit: false };
+            return { teaser: teaserDiv.innerHTML, rest: restDiv.innerHTML, hasSplit: true };
+        }
+
+        function expandBlogBody() {
+            const rest = document.getElementById('blogModalBodyRest');
+            const bar = document.getElementById('blogReadMoreBar');
+            const bottomRow = document.getElementById('blogModalBottomRow');
+            if (rest) rest.style.display = '';
+            if (bar) bar.style.display = 'none';
+            if (bottomRow) bottomRow.style.display = '';
+            trackBlogEngagement('read_more');
+        }
+
         function openBlogModal(num, updateHash) {
             if (updateHash === undefined) updateHash = true;
             currentBlogNum = num;
@@ -2855,9 +2945,29 @@
             }
             if (!article) return;
             currentBlogLang = (lang === 'es' || lang === 'pt') ? lang : 'en';
+            const labels = READMORE_LABELS[currentBlogLang];
             document.getElementById('blogModalTag').textContent = article.tag;
             document.getElementById('blogModalTitle').textContent = article.title;
-            document.getElementById('blogModalBody').innerHTML = article.body;
+
+            const split = splitArticleBody(article.body);
+            const bottomRow = document.getElementById('blogModalBottomRow');
+            if (split.hasSplit) {
+                document.getElementById('blogModalBody').innerHTML = split.teaser +
+                    '<div class="blog-readmore-bar" id="blogReadMoreBar">' +
+                        '<button type="button" class="blog-readmore-btn" onclick="expandBlogBody()">' +
+                            '<span>' + labels.more + '</span> <i class="ph-duotone ph-arrow-down"></i>' +
+                        '</button>' +
+                        '<button type="button" class="blog-earlyreturn-btn" onclick="trackBlogEngagement(\'early_return\'); closeBlogModal();">' +
+                            '<i class="ph-duotone ph-arrow-left"></i> <span>' + labels.back + '</span>' +
+                        '</button>' +
+                    '</div>' +
+                    '<div class="blog-modal-body-rest" id="blogModalBodyRest" style="display:none">' + split.rest + '</div>';
+                if (bottomRow) bottomRow.style.display = 'none';
+            } else {
+                document.getElementById('blogModalBody').innerHTML = split.teaser;
+                if (bottomRow) bottomRow.style.display = '';
+            }
+
             document.getElementById('blogModal').classList.add('open');
             document.body.style.overflow = 'hidden';
             closeShareMenu();
@@ -2878,8 +2988,34 @@
         }
 
         document.getElementById('blogModal').addEventListener('click', function(e) {
-            if (e.target === this) closeBlogModal();
+            if (e.target === this) {
+                trackBlogEngagement('closed_other', 'click_outside');
+                closeBlogModal();
+            }
         });
+
+        // ── TRACKING DE LECTURA (leer más / volver temprano / completo / cierre) ─
+        // Mismo mecanismo que trackShare: push a dataLayer en formato GA4, listo
+        // para contarse apenas se conecte GTM/GA4.
+        function trackBlogEngagement(action, method) {
+            const num = currentBlogNum;
+            const lang = currentBlogLang || currentLang.value;
+            const titleEl = document.getElementById('blogModalTitle');
+            const title = titleEl ? titleEl.textContent : '';
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'blog_engagement',
+                action: action,
+                method: method || action,
+                content_type: 'blog_post',
+                item_id: 'blog-' + num,
+                item_name: title,
+                language: lang
+            });
+            if (typeof gtag === 'function') {
+                gtag('event', 'blog_engagement', { action: action, method: method || action, content_type: 'blog_post', item_id: 'blog-' + num });
+            }
+        }
 
         // ── COMPARTIR ARTÍCULO ─────────────────────────────────────────
         // Cada artículo/idioma comparte la URL de su página estática en /blog/,
