@@ -768,24 +768,6 @@
             flex-wrap: wrap;
         }
 
-        .blog-share-btn-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: rgba(0,217,255,0.08);
-            border: 1px solid var(--border-dark);
-            color: var(--text-gray);
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: border-color 0.3s, color 0.3s, background 0.3s;
-        }
-
-        .blog-share-btn-icon:hover { border-color: var(--secondary); background: rgba(0,217,255,0.14); }
-        .blog-share-btn-icon i { color: var(--icon-accent); font-size: 1.4rem; }
-
         .blog-share--bottom { position: relative; }
         .blog-share--bottom .blog-share-menu { top: auto; bottom: calc(100% + 8px); }
 
@@ -1741,8 +1723,9 @@
                     <i class="ph-duotone ph-arrow-left"></i> <span data-es="Volver al Blog" data-en="Back to Blog" data-pt="Voltar ao Blog">Back to Blog</span>
                 </button>
                 <div class="blog-share blog-share--bottom" id="blogShareBottom">
-                    <button class="blog-share-btn-icon" id="blogShareBtnBottom" type="button" title="Compartir" onclick="handleShareClick(event, 'bottom')">
+                    <button class="blog-share-btn" id="blogShareBtnBottom" type="button" onclick="handleShareClick(event, 'bottom')">
                         <i class="ph-duotone ph-share-network"></i>
+                        <span data-es="Compartir" data-en="Share" data-pt="Compartilhar">Share</span>
                     </button>
                 </div>
             </div>
@@ -2970,7 +2953,7 @@
             const menu = document.getElementById('blogShareMenu');
             if (!menu || !menu.classList.contains('open')) return;
             if (menu.contains(e.target)) return;
-            if (e.target.closest && e.target.closest('.blog-share-btn, .blog-share-btn-icon')) return;
+            if (e.target.closest && e.target.closest('.blog-share-btn')) return;
             closeShareMenu();
         });
 
