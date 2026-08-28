@@ -745,20 +745,49 @@
         .blog-share-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             background: rgba(0,217,255,0.08);
             border: 1px solid var(--border-dark);
             color: var(--text-gray);
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            padding: 7px 14px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 24px;
             cursor: pointer;
             transition: border-color 0.3s, color 0.3s;
         }
 
         .blog-share-btn:hover { border-color: var(--secondary); color: var(--secondary); }
-        .blog-share-btn i { color: var(--icon-accent); font-size: 1rem; }
+        .blog-share-btn i { color: var(--icon-accent); font-size: 1.35rem; }
+
+        .blog-modal-bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .blog-share-btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(0,217,255,0.08);
+            border: 1px solid var(--border-dark);
+            color: var(--text-gray);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: border-color 0.3s, color 0.3s, background 0.3s;
+        }
+
+        .blog-share-btn-icon:hover { border-color: var(--secondary); background: rgba(0,217,255,0.14); }
+        .blog-share-btn-icon i { color: var(--icon-accent); font-size: 1.4rem; }
+
+        .blog-share--bottom { position: relative; }
+        .blog-share--bottom .blog-share-menu { top: auto; bottom: calc(100% + 8px); }
 
         .blog-share-menu {
             display: none;
@@ -1691,25 +1720,32 @@
             <button class="blog-modal-close" onclick="closeBlogModal()">&times;</button>
             <div class="blog-modal-toprow">
                 <span class="blog-modal-tag" id="blogModalTag">EmotionMetrics Blog</span>
-                <div class="blog-share" id="blogShare">
-                    <button class="blog-share-btn" id="blogShareBtn" type="button" onclick="handleShareClick(event)">
+                <div class="blog-share" id="blogShareTop">
+                    <button class="blog-share-btn" id="blogShareBtnTop" type="button" onclick="handleShareClick(event, 'top')">
                         <i class="ph-duotone ph-share-network"></i>
                         <span data-es="Compartir" data-en="Share" data-pt="Compartilhar">Share</span>
                     </button>
                     <div class="blog-share-menu" id="blogShareMenu">
-                        <a id="shareWhatsapp" href="#" target="_blank" rel="noopener"><i class="ph-duotone ph-whatsapp-logo"></i> WhatsApp</a>
-                        <a id="shareTelegram" href="#" target="_blank" rel="noopener"><i class="ph-duotone ph-telegram-logo"></i> Telegram</a>
-                        <a id="shareFacebook" href="#" target="_blank" rel="noopener"><i class="ph-duotone ph-facebook-logo"></i> Facebook</a>
-                        <a id="shareEmail" href="#"><i class="ph-duotone ph-envelope-simple"></i> <span data-es="Correo" data-en="Email" data-pt="E-mail">Email</span></a>
+                        <a id="shareWhatsapp" href="#" target="_blank" rel="noopener" onclick="trackShare('whatsapp'); closeShareMenu();"><i class="ph-duotone ph-whatsapp-logo"></i> WhatsApp</a>
+                        <a id="shareTelegram" href="#" target="_blank" rel="noopener" onclick="trackShare('telegram'); closeShareMenu();"><i class="ph-duotone ph-telegram-logo"></i> Telegram</a>
+                        <a id="shareFacebook" href="#" target="_blank" rel="noopener" onclick="trackShare('facebook'); closeShareMenu();"><i class="ph-duotone ph-facebook-logo"></i> Facebook</a>
+                        <a id="shareEmail" href="#" onclick="trackShare('email'); closeShareMenu();"><i class="ph-duotone ph-envelope-simple"></i> <span data-es="Correo" data-en="Email" data-pt="E-mail">Email</span></a>
                         <button id="shareCopy" type="button" onclick="copyBlogLink()"><i class="ph-duotone ph-link-simple"></i> <span data-es="Copiar enlace" data-en="Copy link" data-pt="Copiar link">Copy link</span></button>
                     </div>
                 </div>
             </div>
             <h2 id="blogModalTitle"></h2>
             <div class="blog-modal-body" id="blogModalBody"></div>
-            <button class="blog-modal-back" onclick="closeBlogModal()">
-                <i class="ph-duotone ph-arrow-left"></i> <span data-es="Volver al Blog" data-en="Back to Blog" data-pt="Voltar ao Blog">Back to Blog</span>
-            </button>
+            <div class="blog-modal-bottom-row">
+                <button class="blog-modal-back" onclick="closeBlogModal()">
+                    <i class="ph-duotone ph-arrow-left"></i> <span data-es="Volver al Blog" data-en="Back to Blog" data-pt="Voltar ao Blog">Back to Blog</span>
+                </button>
+                <div class="blog-share blog-share--bottom" id="blogShareBottom">
+                    <button class="blog-share-btn-icon" id="blogShareBtnBottom" type="button" title="Compartir" onclick="handleShareClick(event, 'bottom')">
+                        <i class="ph-duotone ph-share-network"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1765,6 +1801,16 @@
         }
 
         attachLangBtns(document);
+
+        // Si se llega desde un link de "compartir" (?lang=es|en|pt), respeta ese idioma
+        (function initLangFromQuery() {
+            const requested = new URLSearchParams(window.location.search).get('lang');
+            if (requested !== 'es' && requested !== 'en' && requested !== 'pt') return;
+            document.querySelectorAll('.lang-btn').forEach(function (b) {
+                b.classList.toggle('active', b.dataset.lang === requested);
+            });
+            updateLanguage(requested);
+        })();
 
         // ── HAMBURGER MENU ─────────────────────────────────────────────
         const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -2810,6 +2856,7 @@
         };
 
         let currentBlogNum = null;
+        let currentBlogLang = null;
 
         function openBlogModal(num, updateHash) {
             if (updateHash === undefined) updateHash = true;
@@ -2824,13 +2871,14 @@
                 article = blogArticles[num];
             }
             if (!article) return;
+            currentBlogLang = (lang === 'es' || lang === 'pt') ? lang : 'en';
             document.getElementById('blogModalTag').textContent = article.tag;
             document.getElementById('blogModalTitle').textContent = article.title;
             document.getElementById('blogModalBody').innerHTML = article.body;
             document.getElementById('blogModal').classList.add('open');
             document.body.style.overflow = 'hidden';
             closeShareMenu();
-            updateShareLinks(num, article.title);
+            updateShareLinks(num, currentBlogLang, article.title);
             if (updateHash) {
                 history.pushState({ blog: num }, '', '#blog-' + num);
             }
@@ -2851,31 +2899,66 @@
         });
 
         // ── COMPARTIR ARTÍCULO ─────────────────────────────────────────
-        function blogShareUrl(num) {
-            return window.location.origin + window.location.pathname + '#blog-' + num;
+        // Cada artículo/idioma comparte la URL de su página estática en /blog/,
+        // que trae los meta tags Open Graph (imagen + título + descripción en
+        // ese idioma) para que WhatsApp/Telegram/Facebook arme la vista previa,
+        // y redirige al lector al artículo real dentro del sitio.
+        function blogShareUrl(num, lang) {
+            return window.location.origin + '/blog/blog-' + num + '-' + lang + '.html';
         }
 
-        function updateShareLinks(num, title) {
-            const url = blogShareUrl(num);
+        function updateShareLinks(num, lang, title) {
+            const url = blogShareUrl(num, lang);
             document.getElementById('shareWhatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(title + ' ' + url);
             document.getElementById('shareTelegram').href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(title);
             document.getElementById('shareFacebook').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
             document.getElementById('shareEmail').href = 'mailto:?subject=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(url);
         }
 
-        function handleShareClick(e) {
-            e.stopPropagation();
-            if (navigator.share) {
-                const url = blogShareUrl(currentBlogNum);
-                const title = document.getElementById('blogModalTitle').textContent;
-                navigator.share({ title: title, url: url }).catch(function () {});
-            } else {
-                toggleShareMenu();
+        // Envía un evento "share" estándar de GA4 (method/content_type/item_id) al
+        // dataLayer. No requiere que Analytics esté instalado todavía: el array se
+        // acumula igual, y apenas se agregue GTM/gtag.js al sitio estos eventos
+        // empiezan a contarse sin tocar este código de nuevo.
+        function trackShare(method) {
+            const num = currentBlogNum;
+            const lang = currentBlogLang || currentLang.value;
+            const titleEl = document.getElementById('blogModalTitle');
+            const title = titleEl ? titleEl.textContent : '';
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'share',
+                method: method,
+                content_type: 'blog_post',
+                item_id: 'blog-' + num,
+                item_name: title,
+                language: lang
+            });
+            if (typeof gtag === 'function') {
+                gtag('event', 'share', { method: method, content_type: 'blog_post', item_id: 'blog-' + num });
             }
         }
 
-        function toggleShareMenu() {
-            document.getElementById('blogShareMenu').classList.toggle('open');
+        function handleShareClick(e, which) {
+            e.stopPropagation();
+            if (navigator.share) {
+                const url = blogShareUrl(currentBlogNum, currentBlogLang);
+                const title = document.getElementById('blogModalTitle').textContent;
+                trackShare('web_share_api');
+                navigator.share({ title: title, url: url }).catch(function () {});
+            } else {
+                openShareMenu(which);
+            }
+        }
+
+        function openShareMenu(which) {
+            const menu = document.getElementById('blogShareMenu');
+            const wrapper = document.getElementById(which === 'bottom' ? 'blogShareBottom' : 'blogShareTop');
+            if (menu.parentElement !== wrapper) {
+                wrapper.appendChild(menu);
+                menu.classList.add('open');
+            } else {
+                menu.classList.toggle('open');
+            }
         }
 
         function closeShareMenu() {
@@ -2885,16 +2968,17 @@
 
         document.addEventListener('click', function (e) {
             const menu = document.getElementById('blogShareMenu');
-            const btn = document.getElementById('blogShareBtn');
-            if (menu && menu.classList.contains('open') && !menu.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-                closeShareMenu();
-            }
+            if (!menu || !menu.classList.contains('open')) return;
+            if (menu.contains(e.target)) return;
+            if (e.target.closest && e.target.closest('.blog-share-btn, .blog-share-btn-icon')) return;
+            closeShareMenu();
         });
 
         function copyBlogLink() {
-            const url = blogShareUrl(currentBlogNum);
+            const url = blogShareUrl(currentBlogNum, currentBlogLang);
             const btn = document.getElementById('shareCopy');
             const original = btn.innerHTML;
+            trackShare('copy_link');
             navigator.clipboard.writeText(url).then(function () {
                 const lang = currentLang.value;
                 const label = lang === 'es' ? 'Copiado' : (lang === 'pt' ? 'Copiado' : 'Copied');
