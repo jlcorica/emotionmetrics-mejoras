@@ -1214,6 +1214,34 @@
         }
     </style>
     <script defer src="https://stats.emotionmetrics.ai/script.js" data-website-id="42139944-9f5c-47ed-ab2c-c131663a5721"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://emotionmetrics.ai/#organization",
+          "name": "EmotionMetrics",
+          "url": "https://emotionmetrics.ai/",
+          "description": "AI-powered emotion research for strategic, brand and public-sector decisions.",
+          "location": [
+            { "@type": "Place", "name": "Miami, USA" },
+            { "@type": "Place", "name": "Buenos Aires, Argentina" },
+            { "@type": "Place", "name": "São Paulo, Brazil" }
+          ],
+          "makesOffer": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Emotional Listening with AI", "provider": { "@id": "https://emotionmetrics.ai/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Multimodal Emotional Analysis", "provider": { "@id": "https://emotionmetrics.ai/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "MVP Testing & Agile Cycles", "provider": { "@id": "https://emotionmetrics.ai/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Continuous Intelligence", "provider": { "@id": "https://emotionmetrics.ai/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Educational Research", "provider": { "@id": "https://emotionmetrics.ai/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Opinion Polling & Positioning", "provider": { "@id": "https://emotionmetrics.ai/#organization" } } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Perception & Reputation Monitoring", "provider": { "@id": "https://emotionmetrics.ai/#organization" } } }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 
@@ -3016,6 +3044,9 @@
             if (typeof gtag === 'function') {
                 gtag('event', 'blog_engagement', { action: action, method: method || action, content_type: 'blog_post', item_id: 'blog-' + num });
             }
+            if (typeof umami !== 'undefined') {
+                umami.track('blog_engagement', { action: action, method: method || action, content_type: 'blog_post', item_id: 'blog-' + num, language: lang });
+            }
         }
 
         // ── COMPARTIR ARTÍCULO ─────────────────────────────────────────
@@ -3055,6 +3086,9 @@
             });
             if (typeof gtag === 'function') {
                 gtag('event', 'share', { method: method, content_type: 'blog_post', item_id: 'blog-' + num });
+            }
+            if (typeof umami !== 'undefined') {
+                umami.track('share', { method: method, content_type: 'blog_post', item_id: 'blog-' + num, language: lang });
             }
         }
 
