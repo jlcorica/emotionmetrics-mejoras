@@ -221,6 +221,21 @@
             font-size: 2.46rem;
         }
 
+        /* Banderas de idioma siempre visibles en móvil, debajo del logo,
+           alineadas a la izquierda — no dependen de abrir el menú hamburguesa */
+        .mobile-lang-bar {
+            display: none;
+            gap: 10px;
+            width: 100%;
+            padding: 6px 0 10px;
+            justify-content: flex-start;
+        }
+
+        .mobile-lang-bar .lang-btn {
+            font-size: 1.7rem;
+            padding: 2px 4px;
+        }
+
         /* ===== HERO SECTION ===== */
         .hero {
             margin-top: 335px;
@@ -1184,6 +1199,7 @@
         @media (max-width: 1024px) {
             .nav-row { display: none; }
             .hamburger { display: flex; }
+            .mobile-lang-bar { display: flex; }
             .logo-banner { position: relative; padding-right: 60px; }
             .hero { margin-top: 200px; }
             .hero-image { height: 280px; }
@@ -1253,6 +1269,12 @@
                 <a href="#inicio">
                     <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663110544023/OoApHKyynvMxaugo.png" alt="EmotionMetrics Logo">
                 </a>
+            </div>
+            <!-- Banderas de idioma para móvil: siempre visibles, sin depender del hamburguesa -->
+            <div class="mobile-lang-bar">
+                <button class="lang-btn" data-lang="es" title="Español" aria-label="Español">🇦🇷</button>
+                <button class="lang-btn active" data-lang="en" title="English" aria-label="English">🇺🇸</button>
+                <button class="lang-btn" data-lang="pt" title="Português" aria-label="Português">🇧🇷</button>
             </div>
             <!-- Menú de navegación debajo del logo -->
             <div class="nav-row">
